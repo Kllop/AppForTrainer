@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/left_loyout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/recorder_button"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:onClick="onRecordingStart"
+            android:scaleType="fitCenter"
+            android:src="@drawable/round_blue_rec_disabled" />
+
+        <ImageButton
+            android:id="@+id/button_last_frame"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:onClick="ToLastFrame"
+            android:scaleType="fitCenter"
+            android:src="@drawable/round_blue_forward" />
+
+        <ImageButton
+            android:id="@+id/button_next_frame"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:backgroundTint="#00FFFFFF"
+            android:onClick="OnClickNextFrame"
+            android:scaleType="fitCenter"
+            android:src="@drawable/round_blue_next" />
+
+        <ImageButton
+            android:id="@+id/play_button"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:onClick="onClickStartAnimation"
+            android:scaleType="fitCenter"
+            android:src="@drawable/round_blue_play" />
+
+        <ImageButton
+            android:id="@+id/button_back_frame"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:onClick="OnClickBackFrame"
+            android:scaleType="fitCenter"
+            android:src="@drawable/round_blue_prev" />
+
+        <ImageButton
+            android:id="@+id/button_first_frame"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:onClick="ToFirstFrame"
+            android:scaleType="fitCenter"
+            android:src="@drawable/round_blue_back" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
