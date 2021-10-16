@@ -20,8 +20,8 @@ public class Settings {
         public static boolean FreeAngleAttach = true;
         public static int TimeAnimationImage = 2;
     }
-    public static Map playersForIndexWrite = new HashMap();
-    public static Map playersForIndexRead = new HashMap();
+    public static Map<View, Integer> playersForIndexWrite = new HashMap();
+    public static Map<Integer, View> playersForIndexRead = new HashMap();
     public static final SaveAndLoadComponent saveAndLoadComponent = new SaveAndLoadComponent();
 
     public static View ball;

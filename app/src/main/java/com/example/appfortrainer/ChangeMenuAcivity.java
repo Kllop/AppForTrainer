@@ -16,63 +16,19 @@ import java.util.Set;
 
 public class ChangeMenuAcivity extends Activity{
 
-    private TextView textMainPlayer;
-    private TextView textEnemyPlayer;
-
-    private SeekBar seekBarMain;
-    private SeekBar seekBarEnemy;
-    private EditText textName;
     private Settings.TypeField currentTypeField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_menu);
-        textMainPlayer = findViewById(R.id.TextCountMainPlayer);
-        textEnemyPlayer = findViewById(R.id.TextCountEnemyPlayer);
-        seekBarMain = (SeekBar) findViewById(R.id.ChangeMainCount);
-        textName = (EditText) findViewById(R.id.NameProject);
+        EditText textName = (EditText) findViewById(R.id.NameProject);
         String timeStamp = new SimpleDateFormat("HH.mm.dd.MM.yy").format(Calendar.getInstance().getTime());
         textName.setText(timeStamp);
         currentTypeField = Settings.TypeField.full;
         SwitchFieldType(currentTypeField, true);
-
-        seekBarMain.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textMainPlayer.setText(String.valueOf(progress + 1));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-        seekBarEnemy = (SeekBar) findViewById(R.id.ChangeEnemyCount);
-        seekBarEnemy.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textEnemyPlayer.setText(String.valueOf(progress + 1));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-        textMainPlayer.setText(String.valueOf(seekBarMain.getProgress() + 1 ));
-        textEnemyPlayer.setText(String.valueOf(seekBarEnemy.getProgress() + 1));
     }
+
     private void SwitchFieldType(Settings.TypeField typeField, boolean isOn){
         switch (typeField){
             case full:
@@ -117,6 +73,7 @@ public class ChangeMenuAcivity extends Activity{
         SwitchField(Settings.TypeField.four);
     }
     public void Next(View view) {
+        EditText textName = (EditText) findViewById(R.id.NameProject);
         String name = textName.getText().toString();
         if(name.isEmpty()){
             Toast toast = Toast.makeText(this, "Name is empty", Toast.LENGTH_LONG);
@@ -130,16 +87,15 @@ public class ChangeMenuAcivity extends Activity{
                 return;
             }
         }
+        FrameBuffer.ResetBuffer();
+        Settings.ResetSettings();
         Settings.LoadMainSceneSettings.NameScene = name;
-        Settings.LoadMainSceneSettings.CountMainPlayer = seekBarMain.getProgress() + 1;
-        Settings.LoadMainSceneSettings.CountEnemyPlayer = seekBarEnemy.getProgress() + 1;
+        SeekBar mainPlayer = (SeekBar) findViewById(R.id.count_main_player);
+        Settings.LoadMainSceneSettings.CountMainPlayer =  mainPlayer.getProgress() + 1;
+        SeekBar enemyPlayer = (SeekBar) findViewById(R.id.count_enemy_player);
+        Settings.LoadMainSceneSettings.CountEnemyPlayer = enemyPlayer.getProgress() + 1;
         Settings.LoadMainSceneSettings.typeField = currentTypeField;
         Settings.indexFile = -1;
-        textMainPlayer = null;
-        textEnemyPlayer = null;
-        seekBarMain = null;
-        seekBarEnemy = null;
-        textName = null;
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

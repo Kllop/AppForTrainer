@@ -84,6 +84,7 @@ public class PaintConttroler{
 
     public void StopPaint(){
         Settings.isPaint = false;
+        paintScene.setTranslationZ(2);
         animationConttroler.ResetPlayerPosition();
     }
     public void ViewPaintsInFrame(PaintUnit paintUnit) {

@@ -16,14 +16,13 @@ public class SpawnObjectComponent {
     private final static int SIZE_PLAYER_DIP = 50;
     private final static int SIZE_BALL_DIP = 40;
 
-    public void SpawnNewPlayer(float pY, int Count,  boolean IsMainPlayer , Context context, ConstraintLayout mainScene, DisplayMetrics dMetrics, TouchConttroler touch, MainActivity.IntRef Index) {
+    public void SpawnNewPlayer(float pY, int Count,  boolean IsMainPlayer , Context context, ConstraintLayout mainScene, DisplayMetrics dMetrics, TouchConttroler touch, Integer Index) {
         final float LengthSpawn = dMetrics.widthPixels / 1.5f;
         for(int i = 0; i < Count; i++) {
             float positionX = (dMetrics.widthPixels-LengthSpawn)/2 + 50 + (LengthSpawn/Count * i);
             ConstraintLayout mainLayout = mainScene;
             ImageButton player = new ImageButton(context);
-            if(IsMainPlayer)player.setImageResource(getImageWhitePlayerFromIndex(i + 1));
-            else player.setImageResource(getImageBluePlayerFromIndex(i + 1));
+            player.setImageResource(TouchConttroler.getPlayerImageForNumber(i+1, IsMainPlayer));
             int sizePlayer = (int) TouchConttroler.dipToPixels(SIZE_PLAYER_DIP, context);
             ConstraintLayout.LayoutParams imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer , sizePlayer);
             player.setLayoutParams(imageViewLayoutParams);
@@ -33,85 +32,21 @@ public class SpawnObjectComponent {
             player.setScaleType(ImageView.ScaleType.FIT_CENTER);
             player.setOnTouchListener(touch.TouchPlayer);
 
-            mainLayout.addView(player);
-
-            Settings.playersForIndexWrite.put(player, Index.index);
-            Settings.playersForIndexRead.put(Index.index, player);
+            mainLayout.addView(player);;
+            Settings.playersForIndexWrite.put(player, Index);
+            Settings.playersForIndexRead.put(Index, player);
 
             FrameBuffer.PlayerInformation playerInformation = new FrameBuffer.PlayerInformation();
-            playerInformation.Index = Index.index;
+            playerInformation.Index = Index;
             if(IsMainPlayer) playerInformation.typePlayer = FrameBuffer.TypePlayer.mainPlayer;
             else playerInformation.typePlayer = FrameBuffer.TypePlayer.enemyPlayer;
             playerInformation.Number = i + 1;
             playerInformation.Name = "Name";
             FrameBuffer.playerInformations.add(playerInformation);
-            Index.index++;
+            Index++;
         }
     }
 
-    public int getImageBluePlayerFromIndex(int index){
-        switch (index){
-            case 1:
-                return R.drawable.blue_player_1;
-            case 2:
-                return R.drawable.blue_player_2;
-            case 3:
-                return R.drawable.blue_player_3;
-            case 4:
-                return R.drawable.blue_player_4;
-            case 5:
-                return R.drawable.blue_player_5;
-            case 6:
-                return R.drawable.blue_player_6;
-            case 7:
-                return R.drawable.blue_player_7;
-            case 8:
-                return R.drawable.blue_player_8;
-            case 9:
-                return R.drawable.blue_player_9;
-            case 10:
-                return R.drawable.blue_player_10;
-            case 11:
-                return R.drawable.blue_player_11;
-            case 12:
-                return R.drawable.blue_player_12;
-            case 13:
-                return R.drawable.blue_player_13;
-        };
-        return -1;
-    }
-
-    public int getImageWhitePlayerFromIndex(int index){
-        switch (index){
-            case 1:
-                return R.drawable.white_player_1;
-            case 2:
-                return R.drawable.white_player_2;
-            case 3:
-                return R.drawable.white_player_3;
-            case 4:
-                return R.drawable.white_player_4;
-            case 5:
-                return R.drawable.white_player_5;
-            case 6:
-                return R.drawable.white_player_6;
-            case 7:
-                return R.drawable.white_player_7;
-            case 8:
-                return R.drawable.white_player_8;
-            case 9:
-                return R.drawable.white_player_9;
-            case 10:
-                return R.drawable.white_player_10;
-            case 11:
-                return R.drawable.white_player_11;
-            case 12:
-                return R.drawable.white_player_12;
-            case 13:
-                return R.drawable.white_player_13;
-        };
-        return -1;
-    }
     public void SpawnField(ImageView field,  DisplayMetrics metrics, Context context){
         switch (Settings.LoadMainSceneSettings.typeField){
             case full:
@@ -148,7 +83,7 @@ public class SpawnObjectComponent {
     }
 
 
-    public void SpawnNewBall(Context context, ConstraintLayout mainScene, DisplayMetrics dMetrics, TouchConttroler touch, MainActivity.IntRef Index) {
+    public void SpawnNewBall(Context context, ConstraintLayout mainScene, DisplayMetrics dMetrics, TouchConttroler touch, Integer Index) {
         ConstraintLayout mainLayout = mainScene;
         ImageButton player = new ImageButton(context);
         player.setImageResource(R.drawable.ball);
@@ -163,16 +98,16 @@ public class SpawnObjectComponent {
 
         mainLayout.addView(player);
         Settings.ball = player;
-        Settings.playersForIndexWrite.put(player, Index.index);
-        Settings.playersForIndexRead.put(Index.index, player);
+        Settings.playersForIndexWrite.put(player, Index);
+        Settings.playersForIndexRead.put(Index, player);
 
         FrameBuffer.PlayerInformation playerInformation = new FrameBuffer.PlayerInformation();
-        playerInformation.Index = Index.index;
+        playerInformation.Index = Index;
         playerInformation.typePlayer = FrameBuffer.TypePlayer.ball;
         playerInformation.Number = 0;
         playerInformation.Name = "Name";
         FrameBuffer.playerInformations.add(playerInformation);
-        Index.index++;
+        Index++;
     }
 
 
@@ -186,13 +121,13 @@ public class SpawnObjectComponent {
             switch(playerInformation.typePlayer)
             {
                 case ball:
-                    //player.setImageResource(R.drawable.ball);
+                    player.setImageResource(R.drawable.ball);
                     break;
                 case mainPlayer:
-                    player.setImageResource(getImageWhitePlayerFromIndex(playerInformation.Index));
+                    player.setImageResource(TouchConttroler.getPlayerImageForNumber(playerInformation.Number, true));
                     break;
                 case enemyPlayer:
-                    player.setImageResource(getImageBluePlayerFromIndex(playerInformation.Index));
+                    player.setImageResource(TouchConttroler.getPlayerImageForNumber(playerInformation.Number, false));
                     break;
             }
             ConstraintLayout.LayoutParams imageViewLayoutParams;

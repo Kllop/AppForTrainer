@@ -39,7 +39,7 @@ public class MainActivity extends Activity implements HBRecorderListener
     private boolean onRenderer = false;
     private static final int SCREEN_RECORD_REQUEST_CODE = 100;
 
-    public final class IntRef{int index = 0;}
+    //public final class IntRef{int index = 100;}
 
     /*
     @Override
@@ -71,16 +71,17 @@ public class MainActivity extends Activity implements HBRecorderListener
         SpawnObjectComponent spawnObjectComponent = new SpawnObjectComponent();
         ConstraintLayout playerParent = (ConstraintLayout) findViewById(R.id.player_parent);
         AnimationConttroler.ResetIterator();
-        Settings.ResetSettings();
         if(Settings.indexFile == -1) {
-            IntRef index = new IntRef();
+            int index = 0;
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int positionY = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
             spawnObjectComponent.SpawnNewPlayer(positionY, Settings.LoadMainSceneSettings.CountMainPlayer,
                     true, this, playerParent, displayMetrics, touchConttroler, index);
             positionY = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
+            index += Settings.LoadMainSceneSettings.CountMainPlayer;
             spawnObjectComponent.SpawnNewPlayer(positionY, Settings.LoadMainSceneSettings.CountEnemyPlayer,
                     false, this, playerParent, displayMetrics, touchConttroler, index);
+            index += Settings.LoadMainSceneSettings.CountMainPlayer;
             spawnObjectComponent.SpawnNewBall(this, playerParent, displayMetrics, touchConttroler, index);
         } else{
             spawnObjectComponent.SpawnOldPlayer(this, touchConttroler, playerParent);
@@ -93,7 +94,7 @@ public class MainActivity extends Activity implements HBRecorderListener
     }
 
     public void onClickStartAnimation(View view) {
-        if(Settings.isPaint){return;}
+        if(Settings.isPaint | FrameBuffer.Frames.size() == 0){return;}
         if(Settings.isPlayAnimation){
             animationConttroler.OnStopAnimation();
             UpdateAnimationButton(false);
@@ -199,6 +200,7 @@ public class MainActivity extends Activity implements HBRecorderListener
             Settings.isRecording = true; button.setImageResource(R.drawable.round_blue_rec);
         }
     }
+    public void InitPaint(){findViewById(R.id.paint_parent).setTranslationZ(4);}
     public void OnCreateLine(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
@@ -210,6 +212,7 @@ public class MainActivity extends Activity implements HBRecorderListener
             button.setImageResource(R.drawable.yellow_sq_arr_solid);
             paintConttroler.OnPaintLine();
             currentPaint = TypePaint.BaseLine;
+            InitPaint();
         }
     }
     public void OnCreateDottedLine(View view) {
@@ -223,6 +226,7 @@ public class MainActivity extends Activity implements HBRecorderListener
             button.setImageResource(R.drawable.yellow_sq_arr_doted);
             paintConttroler.OnPaintDottedLine();
             currentPaint = TypePaint.DottedLine;
+            InitPaint();
         }
     }
     public void OnCreatePencil(View view) {
@@ -236,6 +240,7 @@ public class MainActivity extends Activity implements HBRecorderListener
             button.setImageResource(R.drawable.yellow_sq_marker);
             paintConttroler.OnPaintPenсil();
             currentPaint = TypePaint.Pencil;
+            InitPaint();
         }
     }
     public void OnCreateText(View view){
@@ -249,13 +254,34 @@ public class MainActivity extends Activity implements HBRecorderListener
             button.setImageResource(R.drawable.yellow_sq_text_block);
             paintConttroler.OnPaintText();
             currentPaint = TypePaint.Text;
+            InitPaint();
         }
     }
 
     public void ClearAll(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation | Settings.isPaint){return;}
-        FrameBuffer.Frames.clear();
-        animationConttroler.ietterator.SetFirstValue();
+        boolean ResetInterator = false;
+        FrameBuffer.FrameUnit lastFrame = null;
+        for(int i = FrameBuffer.Frames.size() - 1; i >= 0 ; i--){
+            FrameBuffer.FrameUnit frame = FrameBuffer.Frames.get(i);
+            if(frame.Type == FrameBuffer.TypeFrame.paint){
+                FrameBuffer.Frames.remove(i);
+            }
+            if(animationConttroler.ietterator.GetValue() > i & ResetInterator == false & frame.Type != FrameBuffer.TypeFrame.paint){
+                lastFrame = FrameBuffer.Frames.get(i);
+                ResetInterator = true;
+            }
+        }
+        if(lastFrame == null){animationConttroler.ietterator.SetValue(0);}
+        else {
+            for (int i = FrameBuffer.Frames.size() - 1; i >= 0; i--) {
+                FrameBuffer.FrameUnit frame = FrameBuffer.Frames.get(i);
+                if (frame == lastFrame) {
+                    animationConttroler.ietterator.SetValue(i + 1);
+                    break;
+                }
+            }
+        }
         animationConttroler.ietterator.SetMaxValue(FrameBuffer.Frames.size());
         animationConttroler.ResetPlayerPosition();
         UpdateFrameCounter();
@@ -332,24 +358,52 @@ public class MainActivity extends Activity implements HBRecorderListener
         int number = Integer.parseInt(String.valueOf(button.getText()));
         int index = (int) Settings.playersForIndexWrite.get(touchConttroler.currentPlayerNumber);
         FrameBuffer.PlayerInformation informationPlayer = null;
-        for(FrameBuffer.PlayerInformation information : FrameBuffer.playerInformations){
-            if(information.Index == index){informationPlayer = information; break;}
+        FrameBuffer.PlayerInformation otherPlayer = null;
+        if(number == 1 | number == 12){
+            for(FrameBuffer.PlayerInformation information : FrameBuffer.playerInformations){
+                if(information.Index == index){informationPlayer = information; break;}
+            }
+            for(FrameBuffer.PlayerInformation information : FrameBuffer.playerInformations) {
+                if ((information.Number == 1 | information.Number == 12) & information.typePlayer == informationPlayer.typePlayer) { otherPlayer = information;break;
+                }
+            }
+        } else{
+            for(FrameBuffer.PlayerInformation information : FrameBuffer.playerInformations){
+                if(information.Index == index){informationPlayer = information; break;}
+            }
+            for(FrameBuffer.PlayerInformation information : FrameBuffer.playerInformations){
+                if(information.Number == number & information.typePlayer == informationPlayer.typePlayer){ otherPlayer = information; break;}
+            }
         }
         if(informationPlayer == null){return;}
-        int image;
+        int image = -1, otherImage = -1;
         switch (informationPlayer.typePlayer){
             case mainPlayer:
                 image = touchConttroler.getPlayerImageForNumber(number, true);
+                if(otherPlayer != null){
+                    otherImage = touchConttroler.getPlayerImageForNumber(informationPlayer.Number, true);
+                }
                 break;
             case enemyPlayer:
                 image = touchConttroler.getPlayerImageForNumber(number, false);
+                if(otherPlayer != null){
+                    otherImage = touchConttroler.getPlayerImageForNumber(informationPlayer.Number, false);
+                }
                 break;
             default:
-                image = -1;
                 break;
         }
-        if(image == -1){return;}
-        touchConttroler.currentPlayerNumber.setImageResource(image);
+        int intOldPlayerNumber = informationPlayer.Number;
+        if(image != -1){
+            ImageButton player = (ImageButton) Settings.playersForIndexRead.get(informationPlayer.Index);
+            player.setImageResource(image);
+            informationPlayer.Number = number;
+        }
+        if(otherImage != -1){
+            ImageButton player = (ImageButton) Settings.playersForIndexRead.get(otherPlayer.Index);
+            player.setImageResource(otherImage);
+            otherPlayer.Number = intOldPlayerNumber;
+        }
         findViewById(R.id.player_number_layout).setVisibility(View.GONE);
     }
 }

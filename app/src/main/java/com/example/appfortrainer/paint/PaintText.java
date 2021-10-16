@@ -47,8 +47,8 @@ public class PaintText extends ConstraintLayout {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if(isStopPaint){return false;}
-            float eX = motionEvent.getRawX();
-            float eY = motionEvent.getRawY();
+            float eX = motionEvent.getRawX() - (float) TouchConttroler.dipToPixels(90, context);
+            float eY = motionEvent.getRawY() - (float) TouchConttroler.dipToPixels(45, context);
             if(MotionEvent.ACTION_DOWN == motionEvent.getAction()){
                     SpawnText(eX, eY, "text");}
             return false;
@@ -57,8 +57,8 @@ public class PaintText extends ConstraintLayout {
 
     public void SpawnText(float x, float y, String text){
         EditText myText = new EditText(context);
-        myText.setX(x - (float) TouchConttroler.dipToPixels(90, context));
-        myText.setY(y - (float) TouchConttroler.dipToPixels(45, context));
+        myText.setX(x);
+        myText.setY(y);
         myText.setText(text);
         myText.setTextSize(50);
         paintScene.addView(myText);

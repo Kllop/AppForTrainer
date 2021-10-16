@@ -31,6 +31,8 @@ public class LoadSceneActivity extends ListActivity  {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+        FrameBuffer.ResetBuffer();
+        Settings.ResetSettings();
         Settings.saveAndLoadComponent.LoadScene(position);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

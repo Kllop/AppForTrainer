@@ -25,6 +25,8 @@
         android:layout_height="380dp"
         android:scaleType="fitXY"
         android:src="@drawable/full_field"
+        android:translationZ="1px"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +35,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/paint_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:translationZ="2px">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/player_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:translationZ="3px">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -42,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00275965"
+        android:translationZ="5px"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,20 +94,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/player_parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/player_number_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#99086E75"
         android:clickable="true"
+        android:translationZ="6px"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <Button
             android:id="@+id/button21"
@@ -305,6 +311,7 @@
         android:background="#99086E75"
         android:clickable="true"
         android:contextClickable="false"
+        android:translationZ="7px"
         android:visibility="gone"
         tools:visibility="gone">
 

@@ -10,4 +10,6 @@
     <color name="playerColor">#00FFFFFF</color>
     <color name="button_white_off">#C1C1C1</color>
     <color name="button_white_on">#DC1A1A</color>
+    <color name="primary_color">#2196F3</color>
+    <color name="primary_color_background">#256862</color>
 </resources>

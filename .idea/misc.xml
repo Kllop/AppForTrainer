@@ -8,9 +8,13 @@
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265625" />
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/drawable/ic_main_palyer_background.xml" value="0.25104166666666666" />
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/drawable/player.xml" value="0.25104166666666666" />
-        <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/acivity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/drawable/player_seek_bar.xml" value="0.24791666666666667" />
+        <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/drawable/player_white_seek_bar.xml" value="0.24791666666666667" />
+        <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/drawable/shape_seek_bar_text_thumb.xml" value="0.225" />
+        <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/acivity_main.xml" value="0.34322916666666664" />
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/change_menu.xml" value="0.33" />
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/layout.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/layout_seekbar_thumb.xml" value="0.20885416666666667" />
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/left_button_main_menu.xml" value="0.20885416666666667" />
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/load_activity.xml" value="0.23177083333333334" />
         <entry key="..\:/Users/Admin/Desktop/Work/AppForTrainer/app/src/main/res/layout/main_menu.xml" value="0.23489583333333333" />

@@ -71,7 +71,7 @@
             android:backgroundTint="#00FFFFFF"
             android:onClick="ClearAll"
             android:scaleType="fitCenter"
-            android:src="@drawable/blue_sq_white_team" />
+            android:src="@drawable/blue_sq_eraser" />
 
         <ImageButton
             android:id="@+id/button_create_text"

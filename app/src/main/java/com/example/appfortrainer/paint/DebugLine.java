@@ -15,9 +15,11 @@ public class DebugLine extends View {
     protected Paint paint;
     protected Path path;
     protected Canvas mCanvas;
+    protected int Color;
 
-    public DebugLine(Context context) {
+    public DebugLine(Context context, int color) {
         super(context);
+        Color = color;
         init();
     }
     public DebugLine(Context context, AttributeSet attrs) {
@@ -34,7 +36,7 @@ public class DebugLine extends View {
         paint = new Paint(Paint.DITHER_FLAG);
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color);
         paint.setStrokeWidth(5);
         path = new Path();
     }

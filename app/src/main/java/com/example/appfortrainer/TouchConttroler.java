@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import java.util.Map;
+
 public class TouchConttroler {
 
     public AnimationConttroler animationConttroler;
@@ -42,7 +44,7 @@ public class TouchConttroler {
     float LengthBallAttachX;
     float LengthBallAttachY;
 
-    public int getPlayerImageForNumber(int number, boolean isMain){
+    public static int getPlayerImageForNumber(int number, boolean isMain){
         switch (number){
             case 1:
                 if(isMain){return R.drawable.white_player_1;}
@@ -131,7 +133,6 @@ public class TouchConttroler {
         public boolean onTouch(View view, MotionEvent event) {
             if(Settings.isPlayAnimation | Settings.isPaint){return false;}
             if(!(FrameBuffer.Frames.size() == 0 & Settings.SceneSettings.MovePlayerInFirstFrame) & !Settings.isRecording){return false;}
-
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     if(Settings.isRecording){vibration.Vibration();}
@@ -142,6 +143,7 @@ public class TouchConttroler {
                     if(Settings.ParentBall != null){LengthBallInPlayer(event.getRawX(), event.getRawY()); return true;}
                     view.setX(evX + event.getRawX());
                     view.setY(evY + event.getRawY());
+                    int index = (int) Settings.playersForIndexWrite.get(view);
                     MoveBall(view, view.getX() + (SIZE_BALL_PX/2), view.getY() + (SIZE_BALL_PX/2));
                     break;
                 case MotionEvent.ACTION_UP:
@@ -162,17 +164,15 @@ public class TouchConttroler {
     }
 
     private void MoveBall(View ball, float eX, float eY){
-        for(Object key : Settings.playersForIndexRead.keySet())
-        {
-            View player = (View) Settings.playersForIndexRead.get(key);
-            if(player == ball){return;}
+        for(Map.Entry<Integer, View> pair : Settings.playersForIndexRead.entrySet()) {
+            if(ball == pair.getValue()){continue;}
+            View player = (View) pair.getValue();
             final float LengthX = player.getX() + (SIZE_PLAYER_PX/2) - eX;
             final float LengthY = player.getY()+ (SIZE_PLAYER_PX/2) - eY;
             double LengthVector = LengthVector(LengthX, LengthY);
             if(LengthVector < SIZE_PLAYER_PX/2 & player != Settings.ParentBall) {
                 double VectorX, VectorY;
-                if(Settings.SceneSettings.FreeAngleAttach)
-                {
+                if(Settings.SceneSettings.FreeAngleAttach) {
                     FrameBuffer.Vector2 myVector = NormalizeVector2(LengthX, LengthY);
                     VectorX = myVector.getX() * LENGTH_ATTACH_BALL;
                     VectorY = myVector.getY() * LENGTH_ATTACH_BALL;
@@ -186,7 +186,6 @@ public class TouchConttroler {
                 vibration.Vibration();
                 return;
             }
-
         }
     }
 
