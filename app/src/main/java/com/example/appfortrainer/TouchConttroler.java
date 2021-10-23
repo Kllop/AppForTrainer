@@ -47,44 +47,44 @@ public class TouchConttroler {
     public static int getPlayerImageForNumber(int number, boolean isMain){
         switch (number){
             case 1:
-                if(isMain){return R.drawable.white_player_1;}
-                else{return R.drawable.blue_player_1;}
+                if(isMain){return R.mipmap.white_player_1;}
+                else{return R.mipmap.blue_player_1;}
             case 2:
-                if(isMain){return R.drawable.white_player_2;}
-                else{return R.drawable.blue_player_2;}
+                if(isMain){return R.mipmap.white_player_2;}
+                else{return R.mipmap.blue_player_2;}
             case 3:
-                if(isMain){return R.drawable.white_player_3;}
-                else{return R.drawable.blue_player_3;}
+                if(isMain){return R.mipmap.white_player_3;}
+                else{return R.mipmap.blue_player_3;}
             case 4:
-                if(isMain){return R.drawable.white_player_4;}
-                else{return R.drawable.blue_player_4;}
+                if(isMain){return R.mipmap.white_player_4;}
+                else{return R.mipmap.blue_player_4;}
             case 5:
-                if(isMain){return R.drawable.white_player_5;}
-                else{return R.drawable.blue_player_5;}
+                if(isMain){return R.mipmap.white_player_5;}
+                else{return R.mipmap.blue_player_5;}
             case 6:
-                if(isMain){return R.drawable.white_player_6;}
-                else{return R.drawable.blue_player_6;}
+                if(isMain){return R.mipmap.white_player_6;}
+                else{return R.mipmap.blue_player_6;}
             case 7:
-                if(isMain){return R.drawable.white_player_7;}
-                else{return R.drawable.blue_player_7;}
+                if(isMain){return R.mipmap.white_player_7;}
+                else{return R.mipmap.blue_player_7;}
             case 8:
-                if(isMain){return R.drawable.white_player_8;}
-                else{return R.drawable.blue_player_8;}
+                if(isMain){return R.mipmap.white_player_8;}
+                else{return R.mipmap.blue_player_8;}
             case 9:
-                if(isMain){return R.drawable.white_player_9;}
-                else{return R.drawable.blue_player_9;}
+                if(isMain){return R.mipmap.white_player_9;}
+                else{return R.mipmap.blue_player_9;}
             case 10:
-                if(isMain){return R.drawable.white_player_10;}
-                else{return R.drawable.blue_player_10;}
+                if(isMain){return R.mipmap.white_player_10;}
+                else{return R.mipmap.blue_player_10;}
             case 11:
-                if(isMain){return R.drawable.white_player_11;}
-                else{return R.drawable.blue_player_11;}
+                if(isMain){return R.mipmap.white_player_11;}
+                else{return R.mipmap.blue_player_11;}
             case 12:
-                if(isMain){return R.drawable.white_player_12;}
-                else{return R.drawable.blue_player_12;}
+                if(isMain){return R.mipmap.white_player_12;}
+                else{return R.mipmap.blue_player_12;}
             case 13:
-                if(isMain){return R.drawable.white_player_13;}
-                else{return R.drawable.blue_player_13;}
+                if(isMain){return R.mipmap.white_player_13;}
+                else{return R.mipmap.blue_player_13;}
         }
         return -1;
     }
@@ -211,7 +211,7 @@ public class TouchConttroler {
             Settings.ParentBall = null;
         }
     }
-    private double LengthVector(final float x , final float y) {
+    public static double LengthVector(final float x , final float y) {
         return Math.sqrt((x * x) + (y * y));
     }
     private FrameBuffer.Vector2 NormalizeVector2(final float eX , final float eY) {

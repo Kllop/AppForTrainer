@@ -10,15 +10,17 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LoadSceneActivity extends ListActivity  {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Settings.saveAndLoadComponent.LoadProjectionInfo(this);
         String[] values = new String[]{};
         List<String> names = new ArrayList<String>();
-        for (SaveAndLoadComponent.UintSaveProjectionsClass project :Settings.saveAndLoadComponent.projections.projects) {
-            names.add(project.nameFile);
+        for (Map.Entry<Integer, String> pair : Settings.saveAndLoadComponent.projectionsInfo.entrySet()) {
+            names.add(pair.getValue());
         }
         values = names.toArray(values);
 
@@ -33,7 +35,7 @@ public class LoadSceneActivity extends ListActivity  {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         FrameBuffer.ResetBuffer();
         Settings.ResetSettings();
-        Settings.saveAndLoadComponent.LoadScene(position);
+        Settings.saveAndLoadComponent.LoadScene(position, this);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

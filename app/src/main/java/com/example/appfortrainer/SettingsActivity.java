@@ -34,7 +34,7 @@ public class SettingsActivity extends Activity {
     }
     public void SaveSettings()
     {
-        Settings.saveAndLoadComponent.SaveInFileSettings(this);
+        Settings.saveAndLoadComponent.SaveSettings(this);
     }
 
     public void BackMainMenu(View view)

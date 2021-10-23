@@ -22,14 +22,13 @@ public class PaintConttroler{
     private PaintComponent currentPaint;
     private AnimationConttroler animationConttroler;
 
-    public enum TypePaint{ BaseLine, DottedLine, Pencil, Text }
+    public enum TypePaint{ BaseLine, DottedLine, Pencil, Text, Eraser }
 
     public PaintConttroler(Context ctx, ConstraintLayout pScene){
         context = ctx;
         paintScene = pScene;
 
     }
-
     public void setAnimationConttroler(AnimationConttroler ac){
         animationConttroler = ac;
     }
@@ -81,7 +80,13 @@ public class PaintConttroler{
         PaintText editText = new PaintText(context, paintUnit, paintScene, animationConttroler, this);
         paintScene.addView(editText);
     }
-
+    public void OnPaintEraser(){
+        if(!Settings.isRecording | Settings.isPlayAnimation){return;}
+        ClearPaint();
+        PaintUnit paintUnit = new PaintUnit();
+        paintUnit.Type = TypePaint.Eraser;
+        animationConttroler.AddFrame(paintUnit);
+    }
     public void StopPaint(){
         Settings.isPaint = false;
         paintScene.setTranslationZ(2);
@@ -108,6 +113,9 @@ public class PaintConttroler{
                 PaintText paintText = new PaintText(context, paintUnit, paintScene, animationConttroler, this);
                 paintText.LoadPaint();
                 paintScene.addView(paintText);
+                break;
+            case Eraser:
+                ClearPaint();
                 break;
             default:
                 break;

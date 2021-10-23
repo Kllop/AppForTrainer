@@ -14,6 +14,7 @@ import com.example.appfortrainer.paint.PaintConttroler;
 import com.hbisoft.hbrecorder.HBRecorder;
 
 import java.lang.ref.SoftReference;
+import java.util.Set;
 
 public class AnimationConttroler
 {
@@ -91,7 +92,7 @@ public class AnimationConttroler
     public void AddFrame(PaintUnit paintUnit){
         FrameUnit frameUnit = new FrameUnit();
         frameUnit.Type = TypeFrame.paint;
-        frameUnit.frame = paintUnit;
+        frameUnit.paint = paintUnit;
         if(ietterator.GetValue() == ietterator.GetMaxValue()){
             AddNewFrame(frameUnit);
         }
@@ -129,17 +130,24 @@ public class AnimationConttroler
             FrameUnit frameUnit = FrameBuffer.Frames.get(i);
             switch(frameUnit.Type){
                 case paint:
-                    PaintUnit paintUnit = (PaintUnit) frameUnit.frame;
+                    PaintUnit paintUnit = frameUnit.paint;
                     paintConttroler.ViewPaintsInFrame(paintUnit);
                     break;
                 case movePlayer:
-                    MotionPlayer motionPlayer = (MotionPlayer) frameUnit.frame;
+                    MotionPlayer motionPlayer = frameUnit.frame;
                     View player = (View) Settings.playersForIndexRead.get(motionPlayer.Index);
-                    player.setX(motionPlayer.PositionX);
-                    player.setY(motionPlayer.PositionY);
                     if(motionPlayer.BallParentIndex != -1){
                         Settings.ParentBall = (View) Settings.playersForIndexRead.get(motionPlayer.BallParentIndex);
                     }
+                    if(motionPlayer.Index == motionPlayer.BallParentIndex){
+                        float DeltaBallX = player.getX() - Settings.ball.getX();
+                        float DeltaBallY = player.getY() - Settings.ball.getY();
+                        Settings.ball.setX(motionPlayer.PositionX - DeltaBallX);
+                        Settings.ball.setY(motionPlayer.PositionY - DeltaBallY);
+                    }
+                    player.setX(motionPlayer.PositionX);
+                    player.setY(motionPlayer.PositionY);
+
                     break;
             }
         }

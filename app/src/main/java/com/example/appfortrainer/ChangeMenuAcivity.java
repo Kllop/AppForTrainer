@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 import java.util.Set;
 
 public class ChangeMenuAcivity extends Activity{
@@ -80,8 +81,8 @@ public class ChangeMenuAcivity extends Activity{
             toast.show();
             return;
         }
-        for (SaveAndLoadComponent.UintSaveProjectionsClass project :Settings.saveAndLoadComponent.projections.projects) {
-            if(project.nameFile == name){
+        for (Map.Entry<Integer, String> entry : Settings.saveAndLoadComponent.projectionsInfo.entrySet()){
+            if(entry.getValue() == name){
                 Toast toast = Toast.makeText(this, "Name already in use. Please choose another one.", Toast.LENGTH_LONG);
                 toast.show();
                 return;

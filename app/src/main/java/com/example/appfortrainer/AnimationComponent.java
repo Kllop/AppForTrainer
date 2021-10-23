@@ -69,11 +69,11 @@ public class AnimationComponent extends AppCompatActivity {
         FrameUnit frame = frameBuffer.get(ietterator.GetValue());
         switch (frame.Type){
             case paint:
-                PaintUnit paintUnit = (PaintUnit) frame.frame;
+                PaintUnit paintUnit = frame.paint;
                 StartAnimationPaint(paintUnit);
                 break;
             case movePlayer:
-                MotionPlayer motionPlayer = (MotionPlayer) frame.frame;
+                MotionPlayer motionPlayer = frame.frame;
                 PlayAnimation(motionPlayer, delay);
         }
     }

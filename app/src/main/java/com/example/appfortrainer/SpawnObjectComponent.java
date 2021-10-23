@@ -50,9 +50,9 @@ public class SpawnObjectComponent {
     public void SpawnField(ImageView field,  DisplayMetrics metrics, Context context){
         switch (Settings.LoadMainSceneSettings.typeField){
             case full:
-                field.setImageResource(R.drawable.full_field);
+                field.setImageResource(R.mipmap.fields_full);
                 ViewGroup.LayoutParams paramsFull = field.getLayoutParams();
-                paramsFull.height = metrics.heightPixels - (int) TouchConttroler.dipToPixels(20, context);
+                paramsFull.height = metrics.heightPixels + (int) TouchConttroler.dipToPixels(150, context);
                 paramsFull.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(140, context);
                 field.setLayoutParams(paramsFull);
                 return;
@@ -86,7 +86,7 @@ public class SpawnObjectComponent {
     public void SpawnNewBall(Context context, ConstraintLayout mainScene, DisplayMetrics dMetrics, TouchConttroler touch, Integer Index) {
         ConstraintLayout mainLayout = mainScene;
         ImageButton player = new ImageButton(context);
-        player.setImageResource(R.drawable.ball);
+        player.setImageResource(R.mipmap.ball);
         int sizeBall = (int) TouchConttroler.dipToPixels(SIZE_BALL_DIP, context);
         ConstraintLayout.LayoutParams imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizeBall , sizeBall);
         player.setLayoutParams(imageViewLayoutParams);
@@ -121,7 +121,7 @@ public class SpawnObjectComponent {
             switch(playerInformation.typePlayer)
             {
                 case ball:
-                    player.setImageResource(R.drawable.ball);
+                    player.setImageResource(R.mipmap.ball);
                     break;
                 case mainPlayer:
                     player.setImageResource(TouchConttroler.getPlayerImageForNumber(playerInformation.Number, true));
@@ -131,10 +131,14 @@ public class SpawnObjectComponent {
                     break;
             }
             ConstraintLayout.LayoutParams imageViewLayoutParams;
-            if(playerInformation.typePlayer == FrameBuffer.TypePlayer.ball)
-            {imageViewLayoutParams = new ConstraintLayout.LayoutParams(150, 150);
+            if(playerInformation.typePlayer == FrameBuffer.TypePlayer.ball) {
+                int sizeBall = (int) TouchConttroler.dipToPixels(SIZE_BALL_DIP, context);
+                imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizeBall, sizeBall);
                 player.setOnTouchListener(touch.TouchBall);
-            } else{ imageViewLayoutParams = new ConstraintLayout.LayoutParams(200, 200);
+                Settings.ball = player;
+            } else{
+                int sizePlayer = (int) TouchConttroler.dipToPixels(SIZE_PLAYER_DIP, context);
+                imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer, sizePlayer);
                 player.setOnTouchListener(touch.TouchPlayer);}
             player.setLayoutParams(imageViewLayoutParams);
             player.setBackgroundColor(0x00FFFFFF);

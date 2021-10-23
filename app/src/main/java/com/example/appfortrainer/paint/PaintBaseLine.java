@@ -67,7 +67,6 @@ public class PaintBaseLine extends PaintComponent{
         pathTip.moveTo(X + vector1.x * LENTH_TIP, Y + vector1.y * LENTH_TIP);
         pathTip.lineTo(X, Y);
         pathTip.lineTo(X + vector2.x * LENTH_TIP, Y + vector2.y * LENTH_TIP);
-        invalidate();
     }
 
     @Override
@@ -84,7 +83,6 @@ public class PaintBaseLine extends PaintComponent{
         pathTip.moveTo(EndLocation.x + vector1.x * LENTH_TIP, EndLocation.y + vector1.y * LENTH_TIP);
         pathTip.lineTo(EndLocation.x, EndLocation.y);
         pathTip.lineTo(EndLocation.x + vector2.x * LENTH_TIP, EndLocation.y + vector2.y * LENTH_TIP);
-        invalidate();
     }
 
 

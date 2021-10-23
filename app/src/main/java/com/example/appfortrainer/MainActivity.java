@@ -71,9 +71,9 @@ public class MainActivity extends Activity implements HBRecorderListener
         SpawnObjectComponent spawnObjectComponent = new SpawnObjectComponent();
         ConstraintLayout playerParent = (ConstraintLayout) findViewById(R.id.player_parent);
         AnimationConttroler.ResetIterator();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         if(Settings.indexFile == -1) {
             int index = 0;
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int positionY = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
             spawnObjectComponent.SpawnNewPlayer(positionY, Settings.LoadMainSceneSettings.CountMainPlayer,
                     true, this, playerParent, displayMetrics, touchConttroler, index);
@@ -258,33 +258,9 @@ public class MainActivity extends Activity implements HBRecorderListener
         }
     }
 
-    public void ClearAll(View view) {
+    public void OnCreateEraser(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation | Settings.isPaint){return;}
-        boolean ResetInterator = false;
-        FrameBuffer.FrameUnit lastFrame = null;
-        for(int i = FrameBuffer.Frames.size() - 1; i >= 0 ; i--){
-            FrameBuffer.FrameUnit frame = FrameBuffer.Frames.get(i);
-            if(frame.Type == FrameBuffer.TypeFrame.paint){
-                FrameBuffer.Frames.remove(i);
-            }
-            if(animationConttroler.ietterator.GetValue() > i & ResetInterator == false & frame.Type != FrameBuffer.TypeFrame.paint){
-                lastFrame = FrameBuffer.Frames.get(i);
-                ResetInterator = true;
-            }
-        }
-        if(lastFrame == null){animationConttroler.ietterator.SetValue(0);}
-        else {
-            for (int i = FrameBuffer.Frames.size() - 1; i >= 0; i--) {
-                FrameBuffer.FrameUnit frame = FrameBuffer.Frames.get(i);
-                if (frame == lastFrame) {
-                    animationConttroler.ietterator.SetValue(i + 1);
-                    break;
-                }
-            }
-        }
-        animationConttroler.ietterator.SetMaxValue(FrameBuffer.Frames.size());
-        animationConttroler.ResetPlayerPosition();
-        UpdateFrameCounter();
+        paintConttroler.OnPaintEraser();
     }
     public void EventOpenRenderMenu(View view){OpenRenderMenu();}
     public void OpenRenderMenu(){
@@ -297,7 +273,11 @@ public class MainActivity extends Activity implements HBRecorderListener
         menu.setVisibility(View.GONE);
     }
 
-    public void SaveFile(View view){Settings.saveAndLoadComponent.SaveInFileProjections(this);}
+    public void SaveFile(View view){
+        if(Settings.isPaint | Settings.isPlayAnimation){return;}
+        if(FrameBuffer.Frames.size() == 0){return;}
+        Settings.saveAndLoadComponent.SaveScene(this, Settings.LoadMainSceneSettings.NameScene);
+    }
 
     public void OnMainMenu(View view) {
         FrameBuffer.ResetBuffer();

@@ -75,11 +75,13 @@ public class PaintComponent extends View{
     }
 
     protected void init() {
-        paint = new Paint(Paint.DITHER_FLAG);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setAntiAlias(true);
+        paint = new Paint();//Paint.DITHER_FLAG);
         paint.setColor(Color.BLACK);
+        paint.setAntiAlias(true);
         paint.setStrokeWidth(5);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND);
         path = new Path();
     }
 
@@ -92,7 +94,7 @@ public class PaintComponent extends View{
 
     public void startTouch(final float X, final float Y){}
     public void MoveTouch(final float X, final float Y){}
-    public void StopTouch(final float X, final float Y){}
+    public void StopTouch(final float X, final float Y){setFocusable(false); setFocusableInTouchMode(false);}
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -111,7 +113,10 @@ public class PaintComponent extends View{
                 StopTouch(x, y);
                 onNewPaint();
                 break;
+            default:
+                return false;
         }
+        postInvalidate();
         return true;
     }
 }

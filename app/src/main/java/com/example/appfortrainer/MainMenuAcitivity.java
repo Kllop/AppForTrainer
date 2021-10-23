@@ -20,8 +20,8 @@ public class MainMenuAcitivity extends Activity {
         setContentView(R.layout.main_menu);
         int permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (permissionStatus == PackageManager.PERMISSION_GRANTED) {
-            Settings.saveAndLoadComponent.LoadInFileProjections(this);
-            Settings.saveAndLoadComponent.LoadInFileSettings(this);
+            Settings.saveAndLoadComponent.LoadSettings(this);
+            Settings.saveAndLoadComponent.LoadProjectionInfo(this);
         } else {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
@@ -33,8 +33,8 @@ public class MainMenuAcitivity extends Activity {
             case 1:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Settings.saveAndLoadComponent.LoadInFileProjections(this);
-                    Settings.saveAndLoadComponent.LoadInFileSettings(this);
+                    Settings.saveAndLoadComponent.LoadSettings(this);
+                    Settings.saveAndLoadComponent.LoadProjectionInfo(this);
                 } else {
                     Intent intent = new Intent(Intent.ACTION_MAIN);
                     intent.addCategory(Intent.CATEGORY_HOME);

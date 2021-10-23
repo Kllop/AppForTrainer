@@ -1,6 +1,8 @@
 package com.example.appfortrainer.paint;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -19,6 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.appfortrainer.AnimationConttroler;
 import com.example.appfortrainer.FrameBuffer;
+import com.example.appfortrainer.R;
 import com.example.appfortrainer.TouchConttroler;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -47,8 +50,8 @@ public class PaintText extends ConstraintLayout {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if(isStopPaint){return false;}
-            float eX = motionEvent.getRawX() - (float) TouchConttroler.dipToPixels(90, context);
-            float eY = motionEvent.getRawY() - (float) TouchConttroler.dipToPixels(45, context);
+            float eX = motionEvent.getRawX() - (float) TouchConttroler.dipToPixels(60, context);
+            float eY = motionEvent.getRawY() - (float) TouchConttroler.dipToPixels(30, context);
             if(MotionEvent.ACTION_DOWN == motionEvent.getAction()){
                     SpawnText(eX, eY, "text");}
             return false;
@@ -60,7 +63,9 @@ public class PaintText extends ConstraintLayout {
         myText.setX(x);
         myText.setY(y);
         myText.setText(text);
-        myText.setTextSize(50);
+        myText.setTextSize(30);
+        int color = Color.parseColor("#00FFFFFF");
+        myText.getBackground().setColorFilter(color, PorterDuff.Mode.SRC_IN);
         paintScene.addView(myText);
         if(isStopPaint){myText.setInputType(InputType.TYPE_NULL);}
         else{

@@ -7,30 +7,46 @@
     android:layout_height="match_parent"
     android:background="#086E75">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/full_filed"
-        android:layout_width="600dp"
-        android:layout_height="380dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/full_field"
-        android:translationZ="1px"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/full_filed"
+            android:layout_width="600dp"
+            android:layout_height="580dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/fields_full"
+            android:translationZ="1px"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/field_logo"
+            android:translationZ="1px"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/paint_parent"
@@ -308,62 +324,185 @@
         android:id="@+id/render_menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#99086E75"
         android:clickable="true"
         android:contextClickable="false"
         android:translationZ="7px"
         android:visibility="gone"
         tools:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:background="#D20A3D43">
 
-            <ImageButton
-                android:id="@+id/button_screen_recorder"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:onClick="startRecordingScreen"
-                android:scaleType="fitCenter"
-                android:src="@drawable/round_white_render_screen" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.65"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/button_watch_video"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:onClick="WatchVideo"
-                android:scaleType="fitCenter"
-                android:src="@drawable/round_white_play" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/button_share_video"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:onClick="ShareVideo"
-                android:scaleType="fitCenter"
-                android:src="@drawable/round_white_share" />
+                    <ImageView
+                        android:id="@+id/imageView12"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/round_white_save" />
 
-            <ImageButton
-                android:id="@+id/button_close_render_menu"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:backgroundTint="#00FFFFFF"
-                android:onClick="EventCloseRenderMenu"
-                android:scaleType="fitCenter"
-                android:src="@drawable/round_white_step_back" />
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/button26"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="175dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#DCDCDC"
+                        android:fontFamily="sans-serif-light"
+                        android:onClick="SaveFile"
+                        android:text="save scheme"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/round_white_render_screen" />
+
+                    <Button
+                        android:id="@+id/button22"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="175dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#DCDCDC"
+                        android:fontFamily="sans-serif-light"
+                        android:onClick="startRecordingScreen"
+                        android:text="save animation"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/round_white_share" />
+
+                    <Button
+                        android:id="@+id/button23"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="175dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#DCDCDC"
+                        android:fontFamily="sans-serif-light"
+                        android:onClick="ShareVideo"
+                        android:text="share animation"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/round_white_step_back" />
+
+                    <Button
+                        android:id="@+id/button24"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="175dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#DCDCDC"
+                        android:fontFamily="sans-serif-light"
+                        android:onClick="EventCloseRenderMenu"
+                        android:text="back to scheme"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/round_white_exit" />
+
+                    <Button
+                        android:id="@+id/button25"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="175dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#DCDCDC"
+                        android:fontFamily="sans-serif-light"
+                        android:onClick="OnMainMenu"
+                        android:text="exit"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

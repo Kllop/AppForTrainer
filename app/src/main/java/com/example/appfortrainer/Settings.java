@@ -2,6 +2,8 @@ package com.example.appfortrainer;
 
 import android.view.View;
 
+import com.example.appfortrainer.saveandload.SaveAndLoadComponent;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;

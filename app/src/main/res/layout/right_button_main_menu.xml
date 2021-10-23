@@ -15,72 +15,63 @@
 
         <ImageButton
             android:id="@+id/button_open_menu"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:onClick="OnMainMenu"
-            android:scaleType="fitCenter"
-            android:src="@drawable/button_menu" />
-
-        <ImageButton
-            android:id="@+id/button_render_menu"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:onClick="EventOpenRenderMenu"
-            android:scaleType="fitCenter"
-            android:src="@drawable/menu_render" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/button_menu" />
 
         <ImageButton
             android:id="@+id/button_base_line"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:onClick="OnCreateLine"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:src="@drawable/blue_sq_arr_solid" />
 
         <ImageButton
             android:id="@+id/button_dotted_line"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:onClick="OnCreateDottedLine"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:src="@drawable/blue_sq_arr_doted" />
 
         <ImageButton
             android:id="@+id/button_pencil"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:onClick="OnCreatePencil"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:src="@drawable/blue_sq_marker" />
 
         <ImageButton
-            android:id="@+id/button_clear_all"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:backgroundTint="#00FFFFFF"
-            android:onClick="ClearAll"
-            android:scaleType="fitCenter"
-            android:src="@drawable/blue_sq_eraser" />
-
-        <ImageButton
             android:id="@+id/button_create_text"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_weight="1"
             android:backgroundTint="#00FFFFFF"
             android:onClick="OnCreateText"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:src="@drawable/blue_sq_text_block" />
+
+        <ImageButton
+            android:id="@+id/button_clear_all"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00FFFFFF"
+            android:onClick="OnCreateEraser"
+            android:scaleType="centerCrop"
+            android:src="@drawable/blue_sq_eraser" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
