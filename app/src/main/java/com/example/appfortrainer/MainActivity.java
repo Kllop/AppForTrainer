@@ -34,7 +34,6 @@ public class MainActivity extends Activity implements HBRecorderListener
     public TouchConttroler touchConttroler;
     public PaintConttroler paintConttroler;
     public AnimationConttroler animationConttroler;
-    private TypePaint currentPaint;
     private HBRecorder hbRecorder;
     private boolean onRenderer = false;
     private static final int SCREEN_RECORD_REQUEST_CODE = 100;
@@ -94,7 +93,8 @@ public class MainActivity extends Activity implements HBRecorderListener
     }
 
     public void onClickStartAnimation(View view) {
-        if(Settings.isPaint | FrameBuffer.Frames.size() == 0){return;}
+        if(FrameBuffer.Frames.size() == 0){return;}
+        if(Settings.isPaint){StopPaint();}
         if(Settings.isPlayAnimation){
             animationConttroler.OnStopAnimation();
             UpdateAnimationButton(false);
@@ -105,14 +105,16 @@ public class MainActivity extends Activity implements HBRecorderListener
     }
 
     public void OnClickNextFrame(View view){
-        if(Settings.isPaint | Settings.isPlayAnimation){return;}
+        if(Settings.isPlayAnimation){return;}
+        if(Settings.isPaint){StopPaint();}
         AnimationConttroler.ietterator.NextValue();
         UpdateFrameCounter();
         animationConttroler.ResetPlayerPosition();
     }
 
     public void OnClickBackFrame(View view){
-        if(Settings.isPaint | Settings.isPlayAnimation){return;}
+        if(Settings.isPlayAnimation){return;}
+        if(Settings.isPaint){StopPaint();}
         AnimationConttroler.ietterator.BackValue();
         UpdateFrameCounter();
         animationConttroler.ResetPlayerPosition();
@@ -138,7 +140,6 @@ public class MainActivity extends Activity implements HBRecorderListener
 
     @Override
     public void HBRecorderOnComplete() {
-        //hbRecorder.
         SetVisibleAllUI(true);
         OpenRenderMenu();
         onRenderer = false;
@@ -153,7 +154,8 @@ public class MainActivity extends Activity implements HBRecorderListener
         touchConttroler.animationConttroler.OnStopAnimation();
     }
     public void startRecordingScreen(View view) {
-        if(Settings.isPlayAnimation | Settings.isPaint | FrameBuffer.Frames.size() == 0){return;}
+        if(Settings.isPlayAnimation | FrameBuffer.Frames.size() == 0){return;}
+        if(Settings.isPaint){StopPaint();}
         InitRecording();
         MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
         Intent permissionIntent = mediaProjectionManager != null ? mediaProjectionManager.createScreenCaptureIntent() : null;
@@ -200,62 +202,54 @@ public class MainActivity extends Activity implements HBRecorderListener
             Settings.isRecording = true; button.setImageResource(R.drawable.round_blue_rec);
         }
     }
-    public void InitPaint(){findViewById(R.id.paint_parent).setTranslationZ(4);}
+
+    private void InitPaint(){findViewById(R.id.paint_parent).setTranslationZ(4);}
+
+    private void StopPaint(){
+        ImageButton button;
+        button = (ImageButton) findViewById(R.id.button_base_line);
+        button.setImageResource(R.drawable.blue_sq_arr_solid);
+        button = (ImageButton) findViewById(R.id.button_dotted_line);
+        button.setImageResource(R.drawable.blue_sq_arr_doted);
+        button = (ImageButton) findViewById(R.id.button_pencil);
+        button.setImageResource(R.drawable.blue_sq_marker);
+        button = (ImageButton) findViewById(R.id.button_create_text);
+        button.setImageResource(R.drawable.blue_sq_text_block);
+        paintConttroler.StopPaint();
+    }
+
     public void OnCreateLine(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
-        if(Settings.isPaint){
-            if(currentPaint != TypePaint.BaseLine){return;}
-            button.setImageResource(R.drawable.blue_sq_arr_solid);
-            paintConttroler.StopPaint();
-        } else {
-            button.setImageResource(R.drawable.yellow_sq_arr_solid);
-            paintConttroler.OnPaintLine();
-            currentPaint = TypePaint.BaseLine;
-            InitPaint();
-        }
+        if(Settings.isPaint){StopPaint();}
+        button.setImageResource(R.drawable.yellow_sq_arr_solid);
+        paintConttroler.OnPaintLine();
+        InitPaint();
     }
+
     public void OnCreateDottedLine(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
-        if(Settings.isPaint){
-            if(currentPaint != TypePaint.DottedLine){return;}
-            button.setImageResource(R.drawable.blue_sq_arr_doted);
-            paintConttroler.StopPaint();
-        } else {
-            button.setImageResource(R.drawable.yellow_sq_arr_doted);
-            paintConttroler.OnPaintDottedLine();
-            currentPaint = TypePaint.DottedLine;
-            InitPaint();
-        }
+        if(Settings.isPaint){StopPaint();}
+        button.setImageResource(R.drawable.yellow_sq_arr_doted);
+        paintConttroler.OnPaintDottedLine();
+        InitPaint();
     }
     public void OnCreatePencil(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
-        if(Settings.isPaint){
-            if(currentPaint != TypePaint.Pencil){return;}
-            button.setImageResource(R.drawable.blue_sq_marker);
-            paintConttroler.StopPaint();
-        } else {
-            button.setImageResource(R.drawable.yellow_sq_marker);
-            paintConttroler.OnPaintPenсil();
-            currentPaint = TypePaint.Pencil;
-            InitPaint();
-        }
+        if(Settings.isPaint){StopPaint();}
+        button.setImageResource(R.drawable.yellow_sq_marker);
+        paintConttroler.OnPaintPenсil();
+        InitPaint();
     }
     public void OnCreateText(View view){
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
-        if(Settings.isPaint){
-            if(currentPaint != TypePaint.Text){return;}
-            button.setImageResource(R.drawable.blue_sq_text_block);
-            paintConttroler.StopPaint();
-        } else {
-            button.setImageResource(R.drawable.yellow_sq_text_block);
-            paintConttroler.OnPaintText();
-            currentPaint = TypePaint.Text;
-            InitPaint();
-        }
+        if(Settings.isPaint){StopPaint();}
+        button.setImageResource(R.drawable.yellow_sq_text_block);
+        paintConttroler.OnPaintText();
+        InitPaint();
     }
 
     public void OnCreateEraser(View view) {
@@ -290,20 +284,22 @@ public class MainActivity extends Activity implements HBRecorderListener
         finish();
     }
     public void ToLastFrame(View view){
-        if(Settings.isPaint | Settings.isPlayAnimation){return;}
+        if(Settings.isPlayAnimation){return;}
+        if(Settings.isPaint){StopPaint();}
         if(FrameBuffer.Frames.size() == 0){return;}
         AnimationConttroler.ietterator.SetLastValue();
         animationConttroler.ResetPlayerPosition();
         UpdateFrameCounter();
     }
     public void ToFirstFrame(View view){
-        if(Settings.isPaint | Settings.isPlayAnimation){return;}
+        if(Settings.isPlayAnimation){return;}
+        if(Settings.isPaint){StopPaint();}
         if(FrameBuffer.Frames.size() == 0){return;}
         AnimationConttroler.ietterator.SetFirstValue();
         animationConttroler.ResetPlayerPosition();
         UpdateFrameCounter();
     }
-
+    /*
     public void WatchVideo(View view){
         if(hbRecorder.getFilePath() == null){return;}
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(hbRecorder.getFilePath()));
@@ -316,6 +312,7 @@ public class MainActivity extends Activity implements HBRecorderListener
             Toast.makeText(this, "No handler for this type of file.", Toast.LENGTH_LONG).show();
         }
     }
+     */
     public void ShareVideo(View view){
         if(hbRecorder.getFilePath() == null){return;}
         File videoFile = new File(hbRecorder.getFilePath());

@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.example.appfortrainer.FrameBuffer;
 import com.example.appfortrainer.Settings;
-import com.example.appfortrainer.StreamController;
 import com.example.appfortrainer.Settings.TypeField;
 import com.google.gson.Gson;
 
@@ -66,6 +65,9 @@ public class SaveProjection {
         UintSaveProjectionsClass projection = gson.fromJson(json, UintSaveProjectionsClass.class);
         if(projection == null){return;}
         LoadProjection(projection);
+    }
+    public void DeletedProject(Context context, String name){
+        StreamController.deletedFile(context, name);
     }
 
 }

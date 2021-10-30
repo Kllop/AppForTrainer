@@ -58,4 +58,11 @@ public class SaveAndLoadComponent {
         return maxValue+1;
     }
 
+    public void DeletedScene(int index, Context context){
+        String name = projectionsInfo.get(index);
+        saveProjection.DeletedProject(context, name);
+        projectionsInfo.remove(index);
+        SaveProjectionInfo(context);
+    }
+
 }

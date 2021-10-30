@@ -62,6 +62,7 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:backgroundTint="#00FFFFFF"
+                android:onClick="onOpenHelp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/button_help" />
 

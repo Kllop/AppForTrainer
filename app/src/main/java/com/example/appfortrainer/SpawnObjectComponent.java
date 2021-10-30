@@ -57,24 +57,24 @@ public class SpawnObjectComponent {
                 field.setLayoutParams(paramsFull);
                 return;
             case half:
-                field.setImageResource(R.drawable.field_half);
+                field.setImageResource(R.mipmap.fields_1_2);
                 ViewGroup.LayoutParams paramsHalf = field.getLayoutParams();
-                paramsHalf.height = metrics.heightPixels - (int) TouchConttroler.dipToPixels(20, context);
-                paramsHalf.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(260, context);
+                paramsHalf.height = metrics.heightPixels + (int) TouchConttroler.dipToPixels(120, context);
+                paramsHalf.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(140, context);
                 field.setLayoutParams(paramsHalf);
                 break;
             case three:
-                field.setImageResource(R.drawable.field_preset_3x3);
+                field.setImageResource(R.mipmap.fields_1_2_3x3);
                 ViewGroup.LayoutParams paramsThree = field.getLayoutParams();
-                paramsThree.height = metrics.heightPixels - (int) TouchConttroler.dipToPixels(20, context);
-                paramsThree.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(260, context);
+                paramsThree.height = metrics.heightPixels + (int) TouchConttroler.dipToPixels(120, context);
+                paramsThree.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(140, context);
                 field.setLayoutParams(paramsThree);
                 break;
             case four:
-                field.setImageResource(R.drawable.field_preset_4x2);
+                field.setImageResource(R.mipmap.fields_1_2_4x2);
                 ViewGroup.LayoutParams paramsFour = field.getLayoutParams();
-                paramsFour.height = metrics.heightPixels - (int) TouchConttroler.dipToPixels(20, context);
-                paramsFour.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(260, context);
+                paramsFour.height = metrics.heightPixels + (int) TouchConttroler.dipToPixels(120, context);
+                paramsFour.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(140, context);
                 field.setLayoutParams(paramsFour);
                 break;
             default:

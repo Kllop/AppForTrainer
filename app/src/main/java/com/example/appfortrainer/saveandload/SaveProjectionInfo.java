@@ -2,7 +2,6 @@ package com.example.appfortrainer.saveandload;
 
 import android.content.Context;
 
-import com.example.appfortrainer.StreamController;
 import com.google.gson.Gson;
 
 import java.io.IOException;
