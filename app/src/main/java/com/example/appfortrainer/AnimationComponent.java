@@ -96,7 +96,13 @@ public class AnimationComponent extends AppCompatActivity {
         valueAnimatorX = null;
         valueAnimatorY = null;
         if(hbRecorder == null){return;}
-        hbRecorder.stopScreenRecording();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hbRecorder.stopScreenRecording();
+            }
+        }, 1000);
+
     }
     public void OnResumeAnimation() {
         valueAnimatorX.resume();

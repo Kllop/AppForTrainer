@@ -51,7 +51,8 @@ public class SpawnObjectComponent {
         }
     }
 
-    public void SpawnField(ImageView field,  DisplayMetrics metrics, Context context){
+    public void SpawnField(ImageView field, ImageView logoField, DisplayMetrics metrics, Context context){
+        float locationY = TouchConttroler.dipToPixels(100, context);
         switch (Settings.LoadMainSceneSettings.typeField){
             case full:
                 field.setImageResource(R.mipmap.fields_full);
@@ -66,6 +67,7 @@ public class SpawnObjectComponent {
                 paramsHalf.height = metrics.heightPixels + (int) TouchConttroler.dipToPixels(120, context);
                 paramsHalf.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(140, context);
                 field.setLayoutParams(paramsHalf);
+                logoField.setTranslationY(-locationY);
                 break;
             case three:
                 field.setImageResource(R.mipmap.fields_1_2_3x3);
@@ -73,6 +75,7 @@ public class SpawnObjectComponent {
                 paramsThree.height = metrics.heightPixels + (int) TouchConttroler.dipToPixels(120, context);
                 paramsThree.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(140, context);
                 field.setLayoutParams(paramsThree);
+                logoField.setTranslationY(-locationY);
                 break;
             case four:
                 field.setImageResource(R.mipmap.fields_1_2_4x2);
@@ -80,6 +83,7 @@ public class SpawnObjectComponent {
                 paramsFour.height = metrics.heightPixels + (int) TouchConttroler.dipToPixels(120, context);
                 paramsFour.width = metrics.widthPixels - (int) TouchConttroler.dipToPixels(140, context);
                 field.setLayoutParams(paramsFour);
+                logoField.setTranslationY(-locationY);
                 break;
             default:
                 break;

@@ -21,7 +21,7 @@
             android:backgroundTint="#00FFFFFF"
             android:onClick="onRecordingStart"
             android:scaleType="centerCrop"
-            android:src="@mipmap/round_blue_rec_disabled" />
+            android:src="@mipmap/round_blue_rec" />
 
         <ImageButton
             android:id="@+id/button_last_frame"

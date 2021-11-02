@@ -70,12 +70,30 @@ public class MainActivity extends Activity implements HBRecorderListener
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         if(Settings.indexFile == -1) {
             int index = 0;
-            int positionY = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
-            spawnObjectComponent.SpawnNewPlayer(positionY, Settings.LoadMainSceneSettings.CountMainPlayer,
+            int positionYWhite = 0, positionYBlue = 0;
+            switch (Settings.LoadMainSceneSettings.typeField){
+                case full:
+                    positionYWhite = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
+                    positionYBlue = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
+                    break;
+                case half:
+                    positionYBlue = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
+                    positionYWhite = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
+                    break;
+                case three:
+                    positionYBlue = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
+                    positionYWhite = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
+                    break;
+                case four:
+                    positionYBlue = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
+                    positionYWhite = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
+                    break;
+            }
+
+            spawnObjectComponent.SpawnNewPlayer(positionYWhite, Settings.LoadMainSceneSettings.CountMainPlayer,
                     true, this, playerParent, displayMetrics, touchConttroler, index);
-            positionY = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
             index += Settings.LoadMainSceneSettings.CountMainPlayer;
-            spawnObjectComponent.SpawnNewPlayer(positionY, Settings.LoadMainSceneSettings.CountEnemyPlayer,
+            spawnObjectComponent.SpawnNewPlayer(positionYBlue, Settings.LoadMainSceneSettings.CountEnemyPlayer,
                     false, this, playerParent, displayMetrics, touchConttroler, index);
             index += Settings.LoadMainSceneSettings.CountMainPlayer;
             spawnObjectComponent.SpawnNewBall(this, playerParent, displayMetrics, touchConttroler, index);
@@ -86,7 +104,8 @@ public class MainActivity extends Activity implements HBRecorderListener
         UpdateFrameCounter();
         hbRecorder = new HBRecorder(this, this);
         ImageView field = (ImageView) findViewById(R.id.full_filed);
-        spawnObjectComponent.SpawnField(field, displayMetrics, this);
+        ImageView fieldLogo = (ImageView) findViewById(R.id.logo_field);
+        spawnObjectComponent.SpawnField(field, fieldLogo, displayMetrics, this);
     }
 
     public void onClickStartAnimation(View view) {
@@ -193,10 +212,10 @@ public class MainActivity extends Activity implements HBRecorderListener
     }
     public void onRecordingStart(View view) {
         ImageButton button = (ImageButton) view;
-        if(Settings.isRecording){Settings.isRecording = false; button.setImageResource(R.mipmap.round_blue_rec_disabled);}
+        if(Settings.isRecording){Settings.isRecording = false; button.setImageResource(R.mipmap.round_blue_rec);}
         else{
             if(FrameBuffer.PlayerPositionInFrame == null){animationConttroler.SaveAllPlayerPosition();}
-            Settings.isRecording = true; button.setImageResource(R.mipmap.round_blue_rec);
+            Settings.isRecording = true; button.setImageResource(R.mipmap.round_blue_rec_disabled);
         }
     }
 

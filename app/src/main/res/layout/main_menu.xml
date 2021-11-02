@@ -50,6 +50,15 @@
                 android:src="@mipmap/open_button" />
 
             <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="#00FFFFFF"
+                android:onClick="OnSettingsScene"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/settings" />
+
+            <ImageButton
                 android:id="@+id/imageButton4"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -65,15 +74,6 @@
                 android:onClick="onOpenHelp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/button_help" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:backgroundTint="#00FFFFFF"
-                android:onClick="OnSettingsScene"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/button_setting" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

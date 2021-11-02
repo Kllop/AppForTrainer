@@ -2,10 +2,14 @@ package com.example.appfortrainer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -17,6 +21,7 @@ public class PlayersConfigActivity extends Activity{
 
     private boolean isGoalWhite = false;
     private boolean isGoalBlue = false;
+    DisplayMetrics displayMetrics = new DisplayMetrics();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,25 +33,38 @@ public class PlayersConfigActivity extends Activity{
         SeekBar seekBarWhite = findViewById(R.id.count_main_player);
         SeekBar seekBarBlue = findViewById(R.id.count_enemy_player);
         setListerCountPlayer(seekBarBlue, seekBarWhite);
+        ImageView imageField = findViewById(R.id.imageField);
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        ViewGroup.LayoutParams paramsFull = imageField.getLayoutParams();
+
         switch (Settings.LoadMainSceneSettings.typeField){
             case full:
                 seekBarBlue.setProgress(6);
                 seekBarWhite.setProgress(6);
+                imageField.setImageResource(R.mipmap.fields_full);
+                paramsFull.height = displayMetrics.heightPixels + (int) TouchConttroler.dipToPixels(150, this);
                 break;
             case half:
                 seekBarBlue.setProgress(6);
                 seekBarWhite.setProgress(5);
+                imageField.setImageResource(R.mipmap.fields_1_2);
+                paramsFull.height = displayMetrics.heightPixels + (int) TouchConttroler.dipToPixels(150, this);
                 break;
             case three:
                 seekBarBlue.setProgress(6);
                 seekBarWhite.setProgress(5);
+                imageField.setImageResource(R.mipmap.fields_1_2_3x3);
+                paramsFull.height = displayMetrics.heightPixels + (int) TouchConttroler.dipToPixels(150, this);
                 break;
             case four:
                 seekBarBlue.setProgress(5);
-                setGoalWhite();
+                setGoalBlue();
                 seekBarWhite.setProgress(5);
+                imageField.setImageResource(R.mipmap.fields_1_2_4x2);
+                paramsFull.height = displayMetrics.heightPixels + (int) TouchConttroler.dipToPixels(150, this);
                 break;
         }
+        imageField.setLayoutParams(paramsFull);
     }
 
     @Override
