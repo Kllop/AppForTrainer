@@ -176,7 +176,7 @@ public class AnimationComponent extends AppCompatActivity {
                 + "/" + String.valueOf(FrameBuffer.Frames.size() + 1));
     }
     private void UpdateAnimationButton() {
-        imageButton.setImageResource(R.drawable.round_blue_play);
+        imageButton.setImageResource(R.mipmap.round_blue_play);
     }
 
 }

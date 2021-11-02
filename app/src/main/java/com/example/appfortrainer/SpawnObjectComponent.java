@@ -18,7 +18,11 @@ public class SpawnObjectComponent {
 
     public void SpawnNewPlayer(float pY, int Count,  boolean IsMainPlayer , Context context, ConstraintLayout mainScene, DisplayMetrics dMetrics, TouchConttroler touch, Integer Index) {
         final float LengthSpawn = dMetrics.widthPixels / 1.5f;
-        for(int i = 0; i < Count; i++) {
+        int startValue = 0;
+        if(IsMainPlayer){startValue = Settings.LoadMainSceneSettings.isGoalMain ? 0 : 1;}
+        else{startValue = Settings.LoadMainSceneSettings.isGoalEnemy ? 0 : 1;}
+        if(startValue == 1){Count++;}
+        for(int i = startValue; i < Count; i++) {
             float positionX = (dMetrics.widthPixels-LengthSpawn)/2 + 50 + (LengthSpawn/Count * i);
             ConstraintLayout mainLayout = mainScene;
             ImageButton player = new ImageButton(context);

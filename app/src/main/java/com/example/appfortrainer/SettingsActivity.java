@@ -39,8 +39,12 @@ public class SettingsActivity extends Activity {
 
     public void BackMainMenu(View view)
     {
-        Intent intent = new Intent(this, MainMenuAcitivity.class);
+        Intent intent = new Intent(this, MainMenuActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
 }

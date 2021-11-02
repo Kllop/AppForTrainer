@@ -16,6 +16,8 @@ public class Settings {
         public static int CountMainPlayer;
         public static int CountEnemyPlayer;
         public static TypeField typeField = TypeField.full;
+        public static boolean isGoalMain;
+        public static boolean isGoalEnemy;
     }
     public final static class SceneSettings implements Serializable {
         public static boolean MovePlayerInFirstFrame = true;

@@ -143,8 +143,9 @@ public class TouchConttroler {
                     if(Settings.ParentBall != null){LengthBallInPlayer(event.getRawX(), event.getRawY()); return true;}
                     view.setX(evX + event.getRawX());
                     view.setY(evY + event.getRawY());
-                    int index = (int) Settings.playersForIndexWrite.get(view);
-                    MoveBall(view, view.getX() + (SIZE_BALL_PX/2), view.getY() + (SIZE_BALL_PX/2));
+                    if(Settings.SceneSettings.FreeAngleAttach) {
+                        MoveBall(view, view.getX() + (SIZE_BALL_PX / 2), view.getY() + (SIZE_BALL_PX / 2));
+                    }
                     break;
                 case MotionEvent.ACTION_UP:
                     if(!Settings.isRecording){break;}
@@ -172,14 +173,9 @@ public class TouchConttroler {
             double LengthVector = LengthVector(LengthX, LengthY);
             if(LengthVector < SIZE_PLAYER_PX/2 & player != Settings.ParentBall) {
                 double VectorX, VectorY;
-                if(Settings.SceneSettings.FreeAngleAttach) {
-                    FrameBuffer.Vector2 myVector = NormalizeVector2(LengthX, LengthY);
-                    VectorX = myVector.getX() * LENGTH_ATTACH_BALL;
-                    VectorY = myVector.getY() * LENGTH_ATTACH_BALL;
-                } else{
-                    VectorX = LENGTH_ATTACH_BALL;
-                    VectorY = LENGTH_ATTACH_BALL;
-                }
+                FrameBuffer.Vector2 myVector = NormalizeVector2(LengthX, LengthY);
+                VectorX = myVector.getX() * LENGTH_ATTACH_BALL;
+                VectorY = myVector.getY() * LENGTH_ATTACH_BALL;
                 ball.setX(player.getX() + (SIZE_PLAYER_PX/2) - (SIZE_BALL_PX/2) - (float) VectorX);
                 ball.setY(player.getY() + (SIZE_PLAYER_PX/2) - (SIZE_BALL_PX/2) - (float) VectorY);
                 Settings.ParentBall = player;

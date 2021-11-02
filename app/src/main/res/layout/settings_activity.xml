@@ -19,10 +19,13 @@
 
     <Button
         android:id="@+id/button4"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#00AFD1"
         android:onClick="BackMainMenu"
         android:text="Exit"
+        android:textColor="#0A4C50"
         android:theme="@style/Theme.AppForTrainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +61,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:checked="false"
-            android:text="Free Angle"
+            android:text="Magnetic ball"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:theme="@style/Theme.AppForTrainer" />
     </LinearLayout>

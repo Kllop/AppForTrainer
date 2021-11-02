@@ -2,7 +2,6 @@ package com.example.appfortrainer;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -70,7 +69,7 @@ public class LoadSceneActivity extends ListActivity  {
     public void onBackPressed() {
     }
     public void BackMainMenu(View view){
-        Intent intent = new Intent(this, MainMenuAcitivity.class);
+        Intent intent = new Intent(this, MainMenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);

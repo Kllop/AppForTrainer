@@ -22,46 +22,55 @@
         <ListView
             android:id="@android:id/list"
             android:layout_width="fill_parent"
-            android:layout_height="750dp"
+            android:layout_height="match_parent"
             android:layout_weight="1">
 
         </ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button27"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="#00AFD1"
                 android:onClick="BackMainMenu"
-                android:text="Exit" />
+                android:text="Exit"
+                android:textColor="#0A4C50" />
 
             <Button
                 android:id="@+id/button28"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="#00AFD1"
                 android:onClick="OnLoadScene"
-                android:text="Load" />
+                android:text="Load"
+                android:textColor="#0A4C50" />
 
             <Button
                 android:id="@+id/button29"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="#00AFD1"
                 android:onClick="onDestroyScene"
-                android:text="Deleted" />
+                android:text="Deleted"
+                android:textColor="#0A4C50" />
         </LinearLayout>
     </LinearLayout>
 

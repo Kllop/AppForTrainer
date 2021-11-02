@@ -37,9 +37,6 @@ public class MainActivity extends Activity implements HBRecorderListener
     private HBRecorder hbRecorder;
     private boolean onRenderer = false;
     private static final int SCREEN_RECORD_REQUEST_CODE = 100;
-
-    //public final class IntRef{int index = 100;}
-
     /*
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -128,8 +125,8 @@ public class MainActivity extends Activity implements HBRecorderListener
 
     public void UpdateAnimationButton(boolean value) {
         ImageButton PlayAnimationButton = (ImageButton) findViewById(R.id.play_button);
-        if(value) PlayAnimationButton.setImageResource(R.drawable.round_blue_stop);
-        else PlayAnimationButton.setImageResource(R.drawable.round_blue_play);
+        if(value) PlayAnimationButton.setImageResource(R.mipmap.round_blue_stop);
+        else PlayAnimationButton.setImageResource(R.mipmap.round_blue_play);
     }
 
     @Override
@@ -196,10 +193,10 @@ public class MainActivity extends Activity implements HBRecorderListener
     }
     public void onRecordingStart(View view) {
         ImageButton button = (ImageButton) view;
-        if(Settings.isRecording){Settings.isRecording = false; button.setImageResource(R.drawable.round_blue_rec_disabled);}
+        if(Settings.isRecording){Settings.isRecording = false; button.setImageResource(R.mipmap.round_blue_rec_disabled);}
         else{
             if(FrameBuffer.PlayerPositionInFrame == null){animationConttroler.SaveAllPlayerPosition();}
-            Settings.isRecording = true; button.setImageResource(R.drawable.round_blue_rec);
+            Settings.isRecording = true; button.setImageResource(R.mipmap.round_blue_rec);
         }
     }
 
