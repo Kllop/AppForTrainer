@@ -153,7 +153,7 @@
             android:layout_weight="1"
             android:backgroundTint="#00AFD1"
             android:onClick="BackMenu"
-            android:text="Prev"
+            android:text="Exit"
             android:textColor="#0A4C50" />
 
         <Button
@@ -164,7 +164,7 @@
             android:layout_weight="1"
             android:backgroundTint="#00AFD1"
             android:onClick="Next"
-            android:text="Next"
+            android:text="Let's go"
             android:textColor="#0A4C50" />
 
     </LinearLayout>

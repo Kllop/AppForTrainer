@@ -1,16 +1,15 @@
 package com.example.appfortrainer;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageButton;
@@ -37,6 +36,7 @@ public class MainActivity extends Activity implements HBRecorderListener
     private HBRecorder hbRecorder;
     private boolean onRenderer = false;
     private static final int SCREEN_RECORD_REQUEST_CODE = 100;
+    private Delegate delegate;
     /*
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -106,6 +106,7 @@ public class MainActivity extends Activity implements HBRecorderListener
         ImageView field = (ImageView) findViewById(R.id.full_filed);
         ImageView fieldLogo = (ImageView) findViewById(R.id.logo_field);
         spawnObjectComponent.SpawnField(field, fieldLogo, displayMetrics, this);
+        Toast.makeText(this, "set players to initial positions and press record", Toast.LENGTH_LONG).show();
     }
 
     public void onClickStartAnimation(View view) {
@@ -159,7 +160,8 @@ public class MainActivity extends Activity implements HBRecorderListener
         SetVisibleAllUI(true);
         OpenRenderMenu();
         onRenderer = false;
-        if(hbRecorder.getFilePath() != null) { new MediaScaner(this, hbRecorder.getFilePath()); }
+        if(hbRecorder.getFilePath() != null) { new MediaScaner(this, hbRecorder.getFilePath());}
+        delegate.Call();
     }
 
     @Override
@@ -170,6 +172,11 @@ public class MainActivity extends Activity implements HBRecorderListener
         touchConttroler.animationConttroler.OnStopAnimation();
     }
     public void startRecordingScreen(View view) {
+        delegate = new Delegate();
+        CallStartScreenRecording();
+    }
+
+    public void CallStartScreenRecording(){
         if(Settings.isPlayAnimation | FrameBuffer.Frames.size() == 0){return;}
         if(Settings.isPaint){StopPaint();}
         InitRecording();
@@ -185,7 +192,13 @@ public class MainActivity extends Activity implements HBRecorderListener
             if (resultCode == RESULT_OK) {
                 SetVisibleAllUI(false);
                 CloseRenderMenu();
-                hbRecorder.startScreenRecording(data, resultCode, this);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        hbRecorder.startScreenRecording(data, resultCode, MainActivity.this);
+                    }
+                }, 100);
+
             }
         }
     }
@@ -237,6 +250,7 @@ public class MainActivity extends Activity implements HBRecorderListener
     public void OnCreateLine(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
+        if(paintConttroler.CurrentPaintType == TypePaint.BaseLine){StopPaint(); return;}
         if(Settings.isPaint){StopPaint();}
         button.setImageResource(R.drawable.yellow_sq_arr_solid);
         paintConttroler.OnPaintLine();
@@ -246,6 +260,7 @@ public class MainActivity extends Activity implements HBRecorderListener
     public void OnCreateDottedLine(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
+        if(paintConttroler.CurrentPaintType == TypePaint.DottedLine){StopPaint(); return;}
         if(Settings.isPaint){StopPaint();}
         button.setImageResource(R.drawable.yellow_sq_arr_doted);
         paintConttroler.OnPaintDottedLine();
@@ -254,6 +269,7 @@ public class MainActivity extends Activity implements HBRecorderListener
     public void OnCreatePencil(View view) {
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
+        if(paintConttroler.CurrentPaintType == TypePaint.Pencil){StopPaint(); return;}
         if(Settings.isPaint){StopPaint();}
         button.setImageResource(R.drawable.yellow_sq_marker);
         paintConttroler.OnPaintPenсil();
@@ -262,6 +278,7 @@ public class MainActivity extends Activity implements HBRecorderListener
     public void OnCreateText(View view){
         if(!Settings.isRecording | Settings.isPlayAnimation){return;}
         ImageButton button = (ImageButton) view;
+        if(paintConttroler.CurrentPaintType == TypePaint.Text){StopPaint(); return;}
         if(Settings.isPaint){StopPaint();}
         button.setImageResource(R.drawable.yellow_sq_text_block);
         paintConttroler.OnPaintText();
@@ -287,6 +304,7 @@ public class MainActivity extends Activity implements HBRecorderListener
         if(Settings.isPaint | Settings.isPlayAnimation){return;}
         if(FrameBuffer.Frames.size() == 0){return;}
         Settings.saveAndLoadComponent.SaveScene(this, Settings.LoadMainSceneSettings.NameScene);
+        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
     public void OnMainMenu(View view) {
@@ -330,7 +348,17 @@ public class MainActivity extends Activity implements HBRecorderListener
     }
      */
     public void ShareVideo(View view){
-        if(hbRecorder.getFilePath() == null){return;}
+        CallShareVideo();
+    }
+    public void CallShareVideo(){
+        if(hbRecorder.getFilePath() == null){
+            delegate = new Delegate(){
+            @Override
+            public void Call(){CallShareVideo();}
+        };
+            CallStartScreenRecording();
+            return;
+        }
         File videoFile = new File(hbRecorder.getFilePath());
         Uri videoURI =FileProvider.getUriForFile(this, getPackageName(), videoFile);
         Intent shareIntent = new Intent();

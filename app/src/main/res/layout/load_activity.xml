@@ -69,7 +69,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="#00AFD1"
                 android:onClick="onDestroyScene"
-                android:text="Deleted"
+                android:text="Delete"
                 android:textColor="#0A4C50" />
         </LinearLayout>
     </LinearLayout>

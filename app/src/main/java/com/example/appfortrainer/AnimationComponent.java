@@ -101,7 +101,7 @@ public class AnimationComponent extends AppCompatActivity {
             public void run() {
                 hbRecorder.stopScreenRecording();
             }
-        }, 1000);
+        }, 5000);
 
     }
     public void OnResumeAnimation() {

@@ -99,7 +99,7 @@ public class TouchConttroler {
                     currentPlayerNumber = (ImageButton) view;
                     return true;
                 }}
-            if(!(FrameBuffer.Frames.size() == 0 & Settings.SceneSettings.MovePlayerInFirstFrame) & !Settings.isRecording){return false;}
+            if(!(FrameBuffer.PlayerPositionInFrame == null & Settings.SceneSettings.MovePlayerInFirstFrame) & !Settings.isRecording){return false;}
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     if(Settings.isRecording){vibration.Vibration();}

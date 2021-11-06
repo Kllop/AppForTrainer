@@ -21,8 +21,9 @@ public class PaintConttroler{
     private final ConstraintLayout paintScene;
     private PaintComponent currentPaint;
     private AnimationConttroler animationConttroler;
+    public TypePaint CurrentPaintType;
 
-    public enum TypePaint{ BaseLine, DottedLine, Pencil, Text, Eraser }
+    public enum TypePaint{ BaseLine, DottedLine, Pencil, Text, Eraser, None }
 
     public PaintConttroler(Context ctx, ConstraintLayout pScene){
         context = ctx;
@@ -36,6 +37,7 @@ public class PaintConttroler{
     public final void OnPaintLine(){
         if(!Settings.isRecording | Settings.isPlayAnimation | Settings.isPaint){return;}
         Settings.isPaint = true;
+        CurrentPaintType = TypePaint.BaseLine;
         CreateBaseLine();
     }
     public void CreateBaseLine(){
@@ -48,6 +50,7 @@ public class PaintConttroler{
     public final void OnPaintDottedLine(){
         if(!Settings.isRecording | Settings.isPlayAnimation | Settings.isPaint){return;}
         Settings.isPaint = true;
+        CurrentPaintType = TypePaint.DottedLine;
         CreateDottedLine();
     }
     public void CreateDottedLine(){
@@ -60,6 +63,7 @@ public class PaintConttroler{
     public final void OnPaintPenсil(){
         if(!Settings.isRecording | Settings.isPlayAnimation | Settings.isPaint){return;}
         Settings.isPaint = true;
+        CurrentPaintType = TypePaint.Pencil;
         CreatePencil();
     }
     public void CreatePencil(){
@@ -72,6 +76,7 @@ public class PaintConttroler{
     public final void OnPaintText(){
         if(!Settings.isRecording | Settings.isPlayAnimation | Settings.isPaint){return;}
         Settings.isPaint = true;
+        CurrentPaintType = TypePaint.Text;
         CreateText();
     }
     public void CreateText(){
@@ -124,6 +129,7 @@ public class PaintConttroler{
 
     public void ClearPaint() {
         paintScene.removeAllViews();
+        CurrentPaintType = TypePaint.None;
         if(currentPaint != null){
             currentPaint.isStopPaint = true;
             currentPaint = null;
