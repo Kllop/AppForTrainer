@@ -29,11 +29,11 @@ public class TouchConttroler {
     private final ConstraintLayout numerPlayerMenu;
     public ImageButton currentPlayerNumber;
 
-    public TouchConttroler(VibrationComponent vib, Context contx, TextView mytext, AnimationConttroler animConttroler, ConstraintLayout number_menu) {
+    public TouchConttroler(VibrationComponent vib, Context contx, TextView mytext, AnimationConttroler animConttroler, ConstraintLayout number_menu, DisplayMetrics dMetrics) {
         vibration = vib;
         context = contx;
-        SIZE_PLAYER_PX = dipToPixels(SIZE_PLAYER_DIP, context);
-        SIZE_BALL_PX = dipToPixels(SIZE_BALL_DIP, context);
+        SIZE_PLAYER_PX = (int) dMetrics.heightPixels/8;//dipToPixels(SIZE_PLAYER_DIP, context);
+        SIZE_BALL_PX = (int) dMetrics.heightPixels/10;//dipToPixels(SIZE_BALL_DIP, context);
         LENGTH_DEATTACH_BALL = SIZE_PLAYER_PX;
         LENGTH_ATTACH_BALL = SIZE_PLAYER_PX/2f;
         text = mytext;

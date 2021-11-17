@@ -61,16 +61,16 @@ public class MainActivity extends Activity implements HBRecorderListener
         TextView text = findViewById(R.id.FrameCounter);
         ImageButton imageButton = findViewById(R.id.play_button);
         vib = new VibrationComponent(this);
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         paintConttroler = new PaintConttroler(this, paintScene);
         animationConttroler = new AnimationConttroler(text, imageButton, paintConttroler);
-        touchConttroler = new TouchConttroler(vib, this, text, animationConttroler, numberScene);
+        touchConttroler = new TouchConttroler(vib, this, text, animationConttroler, numberScene, displayMetrics);
         paintConttroler.setAnimationConttroler(animationConttroler);
         SpawnObjectComponent spawnObjectComponent = new SpawnObjectComponent();
         ConstraintLayout playerParent = (ConstraintLayout) findViewById(R.id.player_parent);
         if(Settings.isFirstStart){
             AnimationConttroler.ResetIterator();
         }
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         if(Settings.indexFile == -1 & Settings.isFirstStart) {
             int index = 0;
             int positionYWhite = 0, positionYBlue = 0;

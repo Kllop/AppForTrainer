@@ -5,14 +5,18 @@
     android:id="@+id/MainMenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#779EBD">
+    android:background="#165B63">
 
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="#009688"
+        android:backgroundTint="#009688"
+        android:backgroundTintMode="src_atop"
         android:scaleType="centerCrop"
         android:src="@drawable/background"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="100dp"
         tools:layout_editor_absoluteY="105dp" />
 
@@ -85,10 +89,10 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
+        android:src="@mipmap/bestar_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@mipmap/bestar_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

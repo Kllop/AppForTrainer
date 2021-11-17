@@ -14,7 +14,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 public class MainMenuActivity extends Activity {
-    private final String HelpUri = "playlist?list=PLNispf3alD75qGeH_hTOOe6adIPhrZjEG";
+    private final String HelpUri = "playlist?list=PLNispf3alD74mXoHAxXdADVIuFYe7WOg7";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
