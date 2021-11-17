@@ -23,9 +23,9 @@ public class FrameBuffer implements Serializable{
         paint, movePlayer;
     }
 
-    public final static class PlayerPosition implements Serializable {public List<MotionPlayer> playerPosition = new ArrayList(); public int BallParentIndex;}
+    public static class PlayerPosition {public List<MotionPlayer> playerPosition = new ArrayList(); public int BallParentIndex;}
     public static class PaintUnit { public String text; public PaintConttroler.TypePaint Type; public List<PaintConttroler.Vector2> ListPoints = new ArrayList<>();}
-    public static class FrameUnit{public TypeFrame Type; public MotionPlayer frame; public PaintUnit paint;}
+    public static class FrameUnit {public TypeFrame Type; public MotionPlayer frame; public PaintUnit paint;}
     public static List<FrameUnit> Frames = new ArrayList();
     public static PlayerPosition PlayerPositionInFrame;
     public static List<PlayerInformation> playerInformations = new ArrayList<>();

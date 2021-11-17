@@ -25,6 +25,7 @@ import com.hbisoft.hbrecorder.HBRecorder;
 import com.hbisoft.hbrecorder.HBRecorderListener;
 
 import java.io.File;
+import java.util.Set;
 
 public class MainActivity extends Activity implements HBRecorderListener
 {
@@ -66,9 +67,11 @@ public class MainActivity extends Activity implements HBRecorderListener
         paintConttroler.setAnimationConttroler(animationConttroler);
         SpawnObjectComponent spawnObjectComponent = new SpawnObjectComponent();
         ConstraintLayout playerParent = (ConstraintLayout) findViewById(R.id.player_parent);
-        AnimationConttroler.ResetIterator();
+        if(Settings.isFirstStart){
+            AnimationConttroler.ResetIterator();
+        }
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        if(Settings.indexFile == -1) {
+        if(Settings.indexFile == -1 & Settings.isFirstStart) {
             int index = 0;
             int positionYWhite = 0, positionYBlue = 0;
             switch (Settings.LoadMainSceneSettings.typeField){
@@ -97,8 +100,9 @@ public class MainActivity extends Activity implements HBRecorderListener
                     false, this, playerParent, displayMetrics, touchConttroler, index);
             index += Settings.LoadMainSceneSettings.CountMainPlayer;
             spawnObjectComponent.SpawnNewBall(this, playerParent, displayMetrics, touchConttroler, index);
+            Settings.isFirstStart = false;
         } else{
-            spawnObjectComponent.SpawnOldPlayer(this, touchConttroler, playerParent);
+            spawnObjectComponent.SpawnOldPlayer(this, touchConttroler, playerParent, displayMetrics);
             animationConttroler.ResetPlayerPosition();
         }
         UpdateFrameCounter();
@@ -106,7 +110,17 @@ public class MainActivity extends Activity implements HBRecorderListener
         ImageView field = (ImageView) findViewById(R.id.full_filed);
         ImageView fieldLogo = (ImageView) findViewById(R.id.logo_field);
         spawnObjectComponent.SpawnField(field, fieldLogo, displayMetrics, this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         Toast.makeText(this, "set players to initial positions and press record", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     public void onClickStartAnimation(View view) {

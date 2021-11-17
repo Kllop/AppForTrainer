@@ -34,6 +34,7 @@ public class Settings {
     public static boolean isPaint;
     public static int indexFile = -1;
     public static View ParentBall;
+    public static boolean isFirstStart;
 
     public static void ResetSettings(){
         ball = null;

@@ -28,7 +28,7 @@ public class PlayersConfigActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_menu);
         EditText textName = (EditText) findViewById(R.id.NameProject);
-        String timeStamp = new SimpleDateFormat("HH.mm.dd.MM.yy").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("dd.MM.yy HH-mm").format(Calendar.getInstance().getTime());
         textName.setText(timeStamp);
         SeekBar seekBarWhite = findViewById(R.id.count_main_player);
         SeekBar seekBarBlue = findViewById(R.id.count_enemy_player);
@@ -158,7 +158,8 @@ public class PlayersConfigActivity extends Activity{
         }
         FrameBuffer.ResetBuffer();
         Settings.ResetSettings();
-        Settings.LoadMainSceneSettings.NameScene = name;
+
+        Settings.LoadMainSceneSettings.NameScene = name.replace(" ", "_");;
         SeekBar mainPlayer = (SeekBar) findViewById(R.id.count_main_player);
         Settings.LoadMainSceneSettings.CountMainPlayer =  mainPlayer.getProgress() + 1;
         SeekBar enemyPlayer = (SeekBar) findViewById(R.id.count_enemy_player);
@@ -166,6 +167,7 @@ public class PlayersConfigActivity extends Activity{
         Settings.LoadMainSceneSettings.isGoalMain = isGoalWhite;
         Settings.LoadMainSceneSettings.isGoalEnemy = isGoalBlue;
         Settings.indexFile = -1;
+        Settings.isFirstStart = true;
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

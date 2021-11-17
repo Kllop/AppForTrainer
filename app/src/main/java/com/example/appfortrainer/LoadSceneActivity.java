@@ -47,6 +47,7 @@ public class LoadSceneActivity extends ListActivity  {
     }
     public void OnLoadScene(View view){
         if(lastTouchIndex == -1){return;}
+        Settings.isFirstStart = true;
         Settings.saveAndLoadComponent.LoadScene(lastTouchIndex, this);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

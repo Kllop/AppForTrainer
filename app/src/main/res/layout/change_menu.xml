@@ -58,8 +58,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:text="Hello world"
+                android:inputType="textFilter"
+                android:digits="@string/myAlphaNumeric"
+                android:text="Hello_world"
                 android:textColor="#0A4C50"
                 android:textSize="24sp"
                 android:textStyle="bold" />

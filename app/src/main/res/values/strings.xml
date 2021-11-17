@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Be Star Board</string>
     <string name="label_permissions">Allow To Permission</string>
+    <string name="myAlphaNumeric">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ._ -</string>
+    <string name="link1"><a href="https://www.w-polo.ru/">w-polo.ru water polo stat online,</a></string>
+    <string name="link2"><a href="https://github.com/Kllop">https://github.com/Kllop</a></string>
+    <string name="link3"><a href="https://github.com/HBiSoft/HBRecorder">Library</a></string>
 </resources>

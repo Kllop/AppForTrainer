@@ -27,7 +27,7 @@ public class SpawnObjectComponent {
             ConstraintLayout mainLayout = mainScene;
             ImageButton player = new ImageButton(context);
             player.setImageResource(TouchConttroler.getPlayerImageForNumber(i+1, IsMainPlayer));
-            int sizePlayer = (int) TouchConttroler.dipToPixels(SIZE_PLAYER_DIP, context);
+            int sizePlayer = (int) dMetrics.widthPixels/17; //TouchConttroler.dipToPixels(SIZE_PLAYER_DIP, context);
             ConstraintLayout.LayoutParams imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer , sizePlayer);
             player.setLayoutParams(imageViewLayoutParams);
             player.setX(positionX);
@@ -95,7 +95,7 @@ public class SpawnObjectComponent {
         ConstraintLayout mainLayout = mainScene;
         ImageButton player = new ImageButton(context);
         player.setImageResource(R.mipmap.ball);
-        int sizeBall = (int) TouchConttroler.dipToPixels(SIZE_BALL_DIP, context);
+        int sizeBall = (int) dMetrics.widthPixels/21;
         ConstraintLayout.LayoutParams imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizeBall , sizeBall);
         player.setLayoutParams(imageViewLayoutParams);
         player.setX(dMetrics.widthPixels/2 - sizeBall/2);
@@ -119,10 +119,9 @@ public class SpawnObjectComponent {
     }
 
 
-    public void SpawnOldPlayer(Context context, TouchConttroler touch, ConstraintLayout mainLayout){
+    public void SpawnOldPlayer(Context context, TouchConttroler touch, ConstraintLayout mainLayout, DisplayMetrics dMetrics){
         Settings.playersForIndexWrite = new HashMap();
         Settings.playersForIndexRead = new HashMap();
-        FrameBuffer.PlayerPosition playerPosition = FrameBuffer.PlayerPositionInFrame;
         for(FrameBuffer.PlayerInformation playerInformation : FrameBuffer.playerInformations){
             int index = playerInformation.Index;
             ImageButton player = new ImageButton(context);
@@ -140,12 +139,12 @@ public class SpawnObjectComponent {
             }
             ConstraintLayout.LayoutParams imageViewLayoutParams;
             if(playerInformation.typePlayer == FrameBuffer.TypePlayer.ball) {
-                int sizeBall = (int) TouchConttroler.dipToPixels(SIZE_BALL_DIP, context);
+                int sizeBall = (int) dMetrics.widthPixels/21;
                 imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizeBall, sizeBall);
                 player.setOnTouchListener(touch.TouchBall);
                 Settings.ball = player;
             } else{
-                int sizePlayer = (int) TouchConttroler.dipToPixels(SIZE_PLAYER_DIP, context);
+                int sizePlayer = (int) dMetrics.widthPixels/17;
                 imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer, sizePlayer);
                 player.setOnTouchListener(touch.TouchPlayer);}
             player.setLayoutParams(imageViewLayoutParams);

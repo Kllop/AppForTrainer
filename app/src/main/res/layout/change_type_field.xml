@@ -17,8 +17,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
-        android:layout_width="550dp"
-        android:layout_height="380dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,27 +31,27 @@
 
             <ImageButton
                 android:id="@+id/imageButton10"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:cropToPadding="false"
                 android:onClick="setHalfField"
                 android:rotation="0"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/fields_1_2" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/fields_1_2_change" />
 
             <ImageButton
                 android:id="@+id/imageButton6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:cropToPadding="false"
                 android:onClick="setFullField"
                 android:rotation="0"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/fields_full" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/fields_full_change" />
         </TableRow>
 
         <TableRow
@@ -61,27 +61,27 @@
 
             <ImageButton
                 android:id="@+id/imageButton15"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:cropToPadding="false"
                 android:onClick="setThreeField"
                 android:rotation="0"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/fields_1_2_3x3" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/fields_1_2_3x3_change" />
 
             <ImageButton
                 android:id="@+id/imageButton16"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#00FFFFFF"
                 android:cropToPadding="false"
                 android:onClick="setFourField"
                 android:rotation="0"
-                android:scaleType="centerCrop"
-                android:src="@mipmap/fields_1_2_4x2" />
+                android:scaleType="fitXY"
+                android:src="@mipmap/fields_1_2_4x2_change" />
         </TableRow>
 
     </TableLayout>
