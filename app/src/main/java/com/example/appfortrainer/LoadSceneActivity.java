@@ -70,10 +70,7 @@ public class LoadSceneActivity extends ListActivity  {
     public void onBackPressed() {
     }
     public void BackMainMenu(View view){
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);
+        finish();
     }
 
 }

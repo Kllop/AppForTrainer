@@ -13,9 +13,6 @@ import java.util.HashMap;
 
 public class SpawnObjectComponent {
 
-    private final static int SIZE_PLAYER_DIP = 50;
-    private final static int SIZE_BALL_DIP = 40;
-
     public void SpawnNewPlayer(float pY, int Count,  boolean IsMainPlayer , Context context, ConstraintLayout mainScene, DisplayMetrics dMetrics, TouchConttroler touch, Integer Index) {
         final float LengthSpawn = dMetrics.widthPixels / 1.5f;
         int startValue = 0;
@@ -27,7 +24,8 @@ public class SpawnObjectComponent {
             ConstraintLayout mainLayout = mainScene;
             ImageButton player = new ImageButton(context);
             player.setImageResource(TouchConttroler.getPlayerImageForNumber(i+1, IsMainPlayer));
-            int sizePlayer = (int) dMetrics.heightPixels/8; //TouchConttroler.dipToPixels(SIZE_PLAYER_DIP, context);
+            int square = dMetrics.widthPixels * dMetrics.heightPixels;
+            int sizePlayer = (int) Math.sqrt(square/170);
             ConstraintLayout.LayoutParams imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer , sizePlayer);
             player.setLayoutParams(imageViewLayoutParams);
             player.setX(positionX);
@@ -95,7 +93,8 @@ public class SpawnObjectComponent {
         ConstraintLayout mainLayout = mainScene;
         ImageButton player = new ImageButton(context);
         player.setImageResource(R.mipmap.ball);
-        int sizeBall = (int) dMetrics.heightPixels/10;
+        int square = dMetrics.widthPixels * dMetrics.heightPixels;
+        int sizeBall = (int) Math.sqrt(square/235);
         ConstraintLayout.LayoutParams imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizeBall , sizeBall);
         player.setLayoutParams(imageViewLayoutParams);
         player.setX(dMetrics.widthPixels/2 - sizeBall/2);
@@ -138,13 +137,14 @@ public class SpawnObjectComponent {
                     break;
             }
             ConstraintLayout.LayoutParams imageViewLayoutParams;
+            int square = dMetrics.widthPixels * dMetrics.heightPixels;
             if(playerInformation.typePlayer == FrameBuffer.TypePlayer.ball) {
-                int sizeBall = (int) dMetrics.heightPixels/10;
+                int sizeBall = (int) Math.sqrt(square/235);
                 imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizeBall, sizeBall);
                 player.setOnTouchListener(touch.TouchBall);
                 Settings.ball = player;
             } else{
-                int sizePlayer = (int) dMetrics.heightPixels/8;
+                int sizePlayer = (int) Math.sqrt(square/170);
                 imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer, sizePlayer);
                 player.setOnTouchListener(touch.TouchPlayer);}
             player.setLayoutParams(imageViewLayoutParams);

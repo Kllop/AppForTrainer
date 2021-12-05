@@ -14,6 +14,7 @@ public class VibrationComponent {
         scene = context;
     }
     public void Vibration(){
+        if(!Settings.SceneSettings.Vibration){return;}
         Vibrator vibrator = (Vibrator) scene.getSystemService(Context.VIBRATOR_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator.vibrate(VibrationEffect.createOneShot(VIB_TIME, VibrationEffect.DEFAULT_AMPLITUDE));

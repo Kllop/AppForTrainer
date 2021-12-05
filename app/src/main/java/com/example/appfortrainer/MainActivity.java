@@ -58,16 +58,16 @@ public class MainActivity extends Activity implements HBRecorderListener
         setContentView(R.layout.acivity_main);
         ConstraintLayout paintScene = (ConstraintLayout) findViewById(R.id.paint_parent);
         ConstraintLayout numberScene = (ConstraintLayout) findViewById(R.id.player_number_layout);
+        ConstraintLayout playerParent = (ConstraintLayout) findViewById(R.id.player_parent);
         TextView text = findViewById(R.id.FrameCounter);
         ImageButton imageButton = findViewById(R.id.play_button);
         vib = new VibrationComponent(this);
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         paintConttroler = new PaintConttroler(this, paintScene);
         animationConttroler = new AnimationConttroler(text, imageButton, paintConttroler);
-        touchConttroler = new TouchConttroler(vib, this, text, animationConttroler, numberScene, displayMetrics);
+        touchConttroler = new TouchConttroler(vib, text, animationConttroler, numberScene, displayMetrics);
         paintConttroler.setAnimationConttroler(animationConttroler);
         SpawnObjectComponent spawnObjectComponent = new SpawnObjectComponent();
-        ConstraintLayout playerParent = (ConstraintLayout) findViewById(R.id.player_parent);
         if(Settings.isFirstStart){
             AnimationConttroler.ResetIterator();
         }
@@ -107,9 +107,10 @@ public class MainActivity extends Activity implements HBRecorderListener
         }
         UpdateFrameCounter();
         hbRecorder = new HBRecorder(this, this);
-        ImageView field = (ImageView) findViewById(R.id.full_filed);
         ImageView fieldLogo = (ImageView) findViewById(R.id.logo_field);
+        ImageView field = (ImageView) findViewById(R.id.full_filed);
         spawnObjectComponent.SpawnField(field, fieldLogo, displayMetrics, this);
+        touchConttroler.setFieldInformation(field, displayMetrics);
     }
 
     @Override

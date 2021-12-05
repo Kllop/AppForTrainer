@@ -31,6 +31,15 @@ public class SettingsActivity extends Activity {
                 SaveSettings();
             }
         });
+        Switch vib = (Switch) findViewById(R.id.vibration);
+        vib.setChecked(Settings.SceneSettings.Vibration);
+        vib.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Settings.SceneSettings.Vibration = b;
+                SaveSettings();
+            }
+        });
     }
     public void SaveSettings()
     {
@@ -39,8 +48,7 @@ public class SettingsActivity extends Activity {
 
     public void BackMainMenu(View view)
     {
-        Intent intent = new Intent(this, MainMenuActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     @Override

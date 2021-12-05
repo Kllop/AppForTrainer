@@ -64,6 +64,17 @@
             android:text="Magnetic ball"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:theme="@style/Theme.AppForTrainer" />
+
+        <Switch
+            android:id="@+id/vibration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:checked="false"
+            android:text="Vibration feedback\nwhile recording"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:theme="@style/Theme.AppForTrainer" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

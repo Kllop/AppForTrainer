@@ -1,16 +1,21 @@
 package com.example.appfortrainer;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.math.MathUtils;
 
 import java.util.Map;
+import com.example.appfortrainer.paint.DebugLine;
 
 public class TouchConttroler {
 
@@ -18,27 +23,37 @@ public class TouchConttroler {
     private final DoubleTap doubleTap = new DoubleTap();
     private static float LENGTH_ATTACH_BALL;
     private static float LENGTH_DEATTACH_BALL;
-    private final static int SIZE_PLAYER_DIP = 50;
-    private final static int SIZE_BALL_DIP = 40;
     private final float SIZE_PLAYER_PX;
     private final float SIZE_BALL_PX;
     VibrationComponent vibration;
-    private final Context context;
     private float evX, evY;
     private final TextView text;
     private final ConstraintLayout numerPlayerMenu;
+    private int MaxWidthField;
+    private int MaxHeightField;
+    private int MinWidthField;
+    private int MinHeightField;
     public ImageButton currentPlayerNumber;
+    private DebugLine debugLine;
 
-    public TouchConttroler(VibrationComponent vib, Context contx, TextView mytext, AnimationConttroler animConttroler, ConstraintLayout number_menu, DisplayMetrics dMetrics) {
+    public TouchConttroler(VibrationComponent vib, TextView mytext, AnimationConttroler animConttroler, ConstraintLayout number_menu, DisplayMetrics dMetrics) {
         vibration = vib;
-        context = contx;
-        SIZE_PLAYER_PX = (int) dMetrics.heightPixels/8;//dipToPixels(SIZE_PLAYER_DIP, context);
-        SIZE_BALL_PX = (int) dMetrics.heightPixels/10;//dipToPixels(SIZE_BALL_DIP, context);
+        int square = dMetrics.widthPixels * dMetrics.heightPixels;
+        SIZE_PLAYER_PX = (int) Math.sqrt(square/170);
+        SIZE_BALL_PX = (int) Math.sqrt(square/235);
         LENGTH_DEATTACH_BALL = SIZE_PLAYER_PX;
         LENGTH_ATTACH_BALL = SIZE_PLAYER_PX/2f;
         text = mytext;
         animationConttroler = animConttroler;
         numerPlayerMenu = number_menu;
+    }
+
+    public void setFieldInformation(ImageView field, DisplayMetrics dMetrics){
+        ViewGroup.LayoutParams paramsFull = field.getLayoutParams();
+        MaxWidthField = (dMetrics.widthPixels/2) + (paramsFull.width/2);
+        MinWidthField = (dMetrics.widthPixels/2) - (paramsFull.width/2);
+        MaxHeightField = dMetrics.heightPixels;
+        MinHeightField = 0;
     }
 
     float LengthBallAttachX;
@@ -100,17 +115,21 @@ public class TouchConttroler {
                     return true;
                 }}
             if(!(FrameBuffer.PlayerPositionInFrame == null & Settings.SceneSettings.MovePlayerInFirstFrame) & !Settings.isRecording){return false;}
+            float temp = SIZE_PLAYER_PX/2;
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     if(Settings.isRecording){vibration.Vibration();}
-                    evX = view.getX() - event.getRawX();
-                    evY = view.getY() - event.getRawY();
+                    evX = (view.getX()) - event.getRawX();
+                    evY = (view.getY()) - event.getRawY();
                     LengthBallAttachX = view.getX() - Settings.ball.getX();
                     LengthBallAttachY = view.getY() - Settings.ball.getY();
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    view.setX(evX + event.getRawX());
-                    view.setY(evY + event.getRawY());
+                    float X = MathUtils.clamp(evX + event.getRawX(), MinWidthField, MaxWidthField - SIZE_PLAYER_PX);
+                    float Y = MathUtils.clamp(evY + event.getRawY(), MinHeightField, MaxHeightField - SIZE_PLAYER_PX);
+                    view.setX(X);
+                    view.setY(Y);
+                    debugLine.DebugLineDraw(new FrameBuffer.Vector2(500, MinHeightField + 10), new FrameBuffer.Vector2(500, MaxHeightField - 10));
                     if(Settings.ParentBall == view){
                         Settings.ball.setX(view.getX() - LengthBallAttachX);
                         Settings.ball.setY(view.getY() - LengthBallAttachY);
@@ -141,8 +160,10 @@ public class TouchConttroler {
                     break;
                 case MotionEvent.ACTION_MOVE:
                     if(Settings.ParentBall != null){LengthBallInPlayer(event.getRawX(), event.getRawY()); return true;}
-                    view.setX(evX + event.getRawX());
-                    view.setY(evY + event.getRawY());
+                    float X = MathUtils.clamp(evX + event.getRawX(), MinWidthField, MaxWidthField - SIZE_BALL_PX);
+                    float Y = MathUtils.clamp(evY + event.getRawY(), MinHeightField, MaxHeightField - SIZE_BALL_PX);
+                    view.setX(X);
+                    view.setY(Y);
                     if(Settings.SceneSettings.FreeAngleAttach) {
                         MoveBall(view, view.getX() + (SIZE_BALL_PX / 2), view.getY() + (SIZE_BALL_PX / 2));
                     }
