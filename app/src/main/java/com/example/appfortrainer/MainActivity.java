@@ -71,7 +71,8 @@ public class MainActivity extends Activity implements HBRecorderListener
         if(Settings.isFirstStart){
             AnimationConttroler.ResetIterator();
         }
-        if(Settings.indexFile == -1 & Settings.isFirstStart) {
+        if(Settings.indexFile == -1 & FrameBuffer.PlayerPositionInFrame == null) {
+            if(!Settings.isFirstStart){FrameBuffer.ResetBuffer();}
             int index = 0;
             int positionYWhite = 0, positionYBlue = 0;
             switch (Settings.LoadMainSceneSettings.typeField){

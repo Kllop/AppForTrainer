@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 
 import com.example.appfortrainer.AnimationConttroler;
+import com.example.appfortrainer.TouchConttroler;
 import com.example.appfortrainer.paint.PaintConttroler.Vector2;
 import com.example.appfortrainer.FrameBuffer.PaintUnit;
 
@@ -16,9 +17,11 @@ public class PaintBaseLine extends PaintComponent{
     protected Path pathTip;
     protected Paint paintTip;
     protected final int LENTH_TIP = 35;
+    private Context context;
 
     public PaintBaseLine(Context context, PaintUnit pU, PaintConttroler pc, AnimationConttroler ac) {
         super(context, pU, pc, ac);
+        this.context = context;
         initTip();
     }
     public PaintBaseLine(Context context, AttributeSet attrs, PaintUnit pU, PaintConttroler pc, AnimationConttroler ac) {
@@ -33,7 +36,7 @@ public class PaintBaseLine extends PaintComponent{
     private void initTip(){
         pathTip = new Path();
         paintTip = new Paint(Paint.DITHER_FLAG);
-        paintTip.setStyle(Paint.Style.STROKE);
+        paintTip.setStyle(Paint.Style.FILL_AND_STROKE);
         paintTip.setAntiAlias(true);
         paintTip.setColor(Color.BLACK);
         paintTip.setStrokeWidth(5);
@@ -57,11 +60,16 @@ public class PaintBaseLine extends PaintComponent{
 
     @Override
     public void MoveTouch(final float X, final float Y){
-        path.reset();
-        path.moveTo(StartLocation.x, StartLocation.y);
-        path.lineTo(X, Y);
+        Vector2 lastLocation = paintUnit.ListPoints.get(paintUnit.ListPoints.size() - 1);
+        Vector2 Location = new Vector2();
+        Location.x = X;
+        Location.y = Y;
+        if(TouchConttroler.LengthVector(lastLocation.x - Location.x, lastLocation.y - Location.y) > TouchConttroler.dipToPixels(10, context)) {
+            path.lineTo(X, Y);
+            paintUnit.ListPoints.add(Location);
+        }
         pathTip.reset();
-        Vector2 normalizeVector = NormalizeVector2(StartLocation.x, StartLocation.y, X, Y);
+        Vector2 normalizeVector = NormalizeVector2(lastLocation.x, lastLocation.y, X, Y);
         Vector2 vector1 = AngleVector2(normalizeVector, 60);
         Vector2 vector2 = AngleVector2(normalizeVector, -60);
         pathTip.moveTo(X + vector1.x * LENTH_TIP, Y + vector1.y * LENTH_TIP);
@@ -71,18 +79,17 @@ public class PaintBaseLine extends PaintComponent{
 
     @Override
     public void LoadPaint(){
-        isStopPaint = true;
-        StartLocation = paintUnit.ListPoints.get(0);
-        Vector2 EndLocation = paintUnit.ListPoints.get(1);
-        pathTip.reset();
-        Vector2 normalizeVector = NormalizeVector2(StartLocation.x, StartLocation.y, EndLocation.x, EndLocation.y);
+        super.LoadPaint();
+        Vector2 lastLocation = paintUnit.ListPoints.get(paintUnit.ListPoints.size() - 2);
+        Vector2 Location = paintUnit.ListPoints.get(paintUnit.ListPoints.size() - 1);
+        Vector2 normalizeVector = NormalizeVector2(lastLocation.x, lastLocation.y, Location.x, Location.y);
         Vector2 vector1 = AngleVector2(normalizeVector, 60);
         Vector2 vector2 = AngleVector2(normalizeVector, -60);
-        path.moveTo(StartLocation.x, StartLocation.y);
-        path.lineTo(EndLocation.x, EndLocation.y);
-        pathTip.moveTo(EndLocation.x + vector1.x * LENTH_TIP, EndLocation.y + vector1.y * LENTH_TIP);
-        pathTip.lineTo(EndLocation.x, EndLocation.y);
-        pathTip.lineTo(EndLocation.x + vector2.x * LENTH_TIP, EndLocation.y + vector2.y * LENTH_TIP);
+        path.moveTo(Location.x, Location.y);
+        path.lineTo(Location.x, Location.y);
+        pathTip.moveTo(Location.x + vector1.x * LENTH_TIP, Location.y + vector1.y * LENTH_TIP);
+        pathTip.lineTo(Location.x, Location.y);
+        pathTip.lineTo(Location.x + vector2.x * LENTH_TIP, Location.y + vector2.y * LENTH_TIP);
     }
 
 
