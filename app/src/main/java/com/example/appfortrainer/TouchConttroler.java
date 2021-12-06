@@ -34,7 +34,6 @@ public class TouchConttroler {
     private int MinWidthField;
     private int MinHeightField;
     public ImageButton currentPlayerNumber;
-    private DebugLine debugLine;
 
     public TouchConttroler(VibrationComponent vib, TextView mytext, AnimationConttroler animConttroler, ConstraintLayout number_menu, DisplayMetrics dMetrics) {
         vibration = vib;
@@ -129,7 +128,6 @@ public class TouchConttroler {
                     float Y = MathUtils.clamp(evY + event.getRawY(), MinHeightField, MaxHeightField - SIZE_PLAYER_PX);
                     view.setX(X);
                     view.setY(Y);
-                    debugLine.DebugLineDraw(new FrameBuffer.Vector2(500, MinHeightField + 10), new FrameBuffer.Vector2(500, MaxHeightField - 10));
                     if(Settings.ParentBall == view){
                         Settings.ball.setX(view.getX() - LengthBallAttachX);
                         Settings.ball.setY(view.getY() - LengthBallAttachY);
