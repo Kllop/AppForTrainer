@@ -25,7 +25,7 @@ public class SpawnObjectComponent {
             ImageButton player = new ImageButton(context);
             player.setImageResource(TouchConttroler.getPlayerImageForNumber(i+1, IsMainPlayer));
             int square = dMetrics.widthPixels * dMetrics.heightPixels;
-            int sizePlayer = (int) Math.sqrt(square/170);
+            int sizePlayer = (int) Math.sqrt(square/160);
             ConstraintLayout.LayoutParams imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer , sizePlayer);
             player.setLayoutParams(imageViewLayoutParams);
             player.setX(positionX);
@@ -144,7 +144,7 @@ public class SpawnObjectComponent {
                 player.setOnTouchListener(touch.TouchBall);
                 Settings.ball = player;
             } else{
-                int sizePlayer = (int) Math.sqrt(square/170);
+                int sizePlayer = (int) Math.sqrt(square/160);
                 imageViewLayoutParams = new ConstraintLayout.LayoutParams(sizePlayer, sizePlayer);
                 player.setOnTouchListener(touch.TouchPlayer);}
             player.setLayoutParams(imageViewLayoutParams);

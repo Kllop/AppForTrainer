@@ -12,4 +12,6 @@
     <color name="button_white_on">#DC1A1A</color>
     <color name="primary_color">#2196F3</color>
     <color name="primary_color_background">#256862</color>
+    <color name="button_background">#103033</color>
+    <color name="button_text">#528e92</color>
 </resources>

@@ -153,10 +153,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#00AFD1"
+            android:backgroundTint="@color/button_background"
             android:onClick="BackMenu"
             android:text="Exit"
-            android:textColor="#0A4C50" />
+            android:textColor="@color/button_text" />
 
         <Button
             android:id="@+id/button2"
@@ -164,10 +164,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="#00AFD1"
+            android:backgroundTint="@color/button_background"
             android:onClick="Next"
             android:text="Let's go"
-            android:textColor="#0A4C50" />
+            android:textColor="@color/button_text" />
 
     </LinearLayout>
 

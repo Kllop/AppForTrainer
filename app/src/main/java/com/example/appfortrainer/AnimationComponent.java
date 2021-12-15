@@ -35,11 +35,13 @@ public class AnimationComponent extends AppCompatActivity {
     private final ImageButton imageButton;
     private Handler handler;
     private Runnable runnable;
+    private final long SpeedAnimation;
 
     public AnimationComponent(TextView mytext, PaintConttroler pConttroler, ImageButton image){
         text = mytext;
         paintConttroler = pConttroler;
         imageButton = image;
+        SpeedAnimation = (long) (DEFAULT_ANIMATION_DURATION / Settings.SceneSettings.AnimationSpeed);
     }
 
     public void OnStartAnimation(SoftReference<Ietterator> itter) {
@@ -158,8 +160,8 @@ public class AnimationComponent extends AppCompatActivity {
         valueAnimatorX.setInterpolator(new LinearInterpolator());
         valueAnimatorY.setInterpolator(new LinearInterpolator());
 
-        valueAnimatorX.setDuration(DEFAULT_ANIMATION_DURATION);
-        valueAnimatorY.setDuration(DEFAULT_ANIMATION_DURATION);
+        valueAnimatorX.setDuration(SpeedAnimation);
+        valueAnimatorY.setDuration(SpeedAnimation);
 
         if(isDelay){
             valueAnimatorX.setStartDelay(DEFAULT_ANIMATION_DELAY);

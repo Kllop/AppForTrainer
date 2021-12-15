@@ -17,12 +17,14 @@ public class SaveSettings {
         public boolean MovePlayerInFirstFrame;
         public boolean FreeAngleAttach;
         public boolean Vibration;
+        public float AnimationSpeed;
     }
 
     private void LoadSettings(UintSaveSettingsClass saveClass){
         Settings.SceneSettings.MovePlayerInFirstFrame = saveClass.MovePlayerInFirstFrame;
         Settings.SceneSettings.FreeAngleAttach = saveClass.FreeAngleAttach;
         Settings.SceneSettings.Vibration = saveClass.Vibration;
+        Settings.SceneSettings.AnimationSpeed = saveClass.AnimationSpeed;
     }
 
     private UintSaveSettingsClass SaveSettings(){
@@ -30,6 +32,7 @@ public class SaveSettings {
         saveClass.MovePlayerInFirstFrame = Settings.SceneSettings.MovePlayerInFirstFrame;
         saveClass.FreeAngleAttach = Settings.SceneSettings.FreeAngleAttach;
         saveClass.Vibration = Settings.SceneSettings.Vibration;
+        saveClass.AnimationSpeed = Settings.SceneSettings.AnimationSpeed;
         return saveClass;
     }
     

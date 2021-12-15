@@ -23,7 +23,8 @@ public class Settings {
         public static boolean MovePlayerInFirstFrame = true;
         public static boolean FreeAngleAttach = true;
         public static int TimeAnimationImage = 2;
-        public static boolean Vibration = true;
+        public static boolean Vibration = false;
+        public static float AnimationSpeed = 1.5f;
     }
     public static Map<View, Integer> playersForIndexWrite = new HashMap();
     public static Map<Integer, View> playersForIndexRead = new HashMap();

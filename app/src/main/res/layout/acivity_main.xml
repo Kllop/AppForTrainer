@@ -37,6 +37,7 @@
             android:id="@+id/logo_field"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:rotation="90"
             android:scaleType="centerCrop"
             android:src="@drawable/field_logo"
             android:translationZ="1px"
@@ -357,6 +358,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
+                        android:onClick="SaveFile"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/round_white_save" />
 
@@ -388,6 +390,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
+                        android:onClick="startRecordingScreen"
                         android:scaleType="centerCrop"
                         android:src="@drawable/round_white_render_screen" />
 
@@ -419,6 +422,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
+                        android:onClick="ShareVideo"
                         android:scaleType="centerCrop"
                         android:src="@drawable/round_white_share" />
 
@@ -450,6 +454,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
+                        android:onClick="EventCloseRenderMenu"
                         android:scaleType="centerCrop"
                         android:src="@drawable/round_white_step_back" />
 
@@ -481,6 +486,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_weight="1"
+                        android:onClick="OnMainMenu"
                         android:scaleType="centerCrop"
                         android:src="@mipmap/round_white_exit" />
 

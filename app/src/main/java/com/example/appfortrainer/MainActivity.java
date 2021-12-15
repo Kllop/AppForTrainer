@@ -75,22 +75,16 @@ public class MainActivity extends Activity implements HBRecorderListener
             if(!Settings.isFirstStart){FrameBuffer.ResetBuffer();}
             int index = 0;
             int positionYWhite = 0, positionYBlue = 0;
+            int square = displayMetrics.widthPixels * displayMetrics.heightPixels;
+            int sizePlayer = (int) Math.sqrt(square/160);
             switch (Settings.LoadMainSceneSettings.typeField){
                 case full:
-                    positionYWhite = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
-                    positionYBlue = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
+                    positionYWhite = displayMetrics.heightPixels - (int) sizePlayer - displayMetrics.heightPixels/10;
+                    positionYBlue = displayMetrics.heightPixels/10;
                     break;
-                case half:
-                    positionYBlue = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
-                    positionYWhite = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
-                    break;
-                case three:
-                    positionYBlue = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
-                    positionYWhite = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
-                    break;
-                case four:
-                    positionYBlue = displayMetrics.heightPixels - (int) TouchConttroler.dipToPixels(125, this);
-                    positionYWhite = (int) (TouchConttroler.dipToPixels(125, this) - TouchConttroler.dipToPixels(75, this));
+                default:
+                    positionYBlue = displayMetrics.heightPixels - (int) sizePlayer - displayMetrics.heightPixels/10;
+                    positionYWhite = displayMetrics.heightPixels/10;
                     break;
             }
 

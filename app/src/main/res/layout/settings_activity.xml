@@ -22,10 +22,10 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#00AFD1"
+        android:backgroundTint="@color/button_background"
         android:onClick="BackMainMenu"
         android:text="Exit"
-        android:textColor="#0A4C50"
+        android:textColor="@color/button_text"
         android:theme="@style/Theme.AppForTrainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
 
         <Switch
             android:id="@+id/player_move"
-            android:layout_width="300dp"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:checked="false"
@@ -59,7 +59,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
             android:checked="false"
             android:text="Magnetic ball"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -70,11 +69,80 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
             android:checked="false"
-            android:text="Vibration feedback\nwhile recording"
+            android:text="Vibration feedback while recording"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:theme="@style/Theme.AppForTrainer" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:text="Animation speed"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/button_sped_1"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="75dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/button_background"
+                android:onClick="button_speed_1"
+                android:text="x1.0"
+                android:textColor="@color/button_text"
+                android:theme="@style/Theme.AppForTrainer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <Button
+                android:id="@+id/button_sped_2"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="75dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/button_background"
+                android:onClick="button_speed_2"
+                android:text="x1.5"
+                android:textColor="@color/button_text"
+                android:theme="@style/Theme.AppForTrainer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <Button
+                android:id="@+id/button_sped_3"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="75dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="16dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/button_background"
+                android:onClick="button_speed_3"
+                android:text="x2.0"
+                android:textColor="@color/button_text"
+                android:theme="@style/Theme.AppForTrainer"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
+                app:layout_constraintVertical_bias="0.65" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

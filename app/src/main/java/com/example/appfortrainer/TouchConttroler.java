@@ -38,7 +38,7 @@ public class TouchConttroler {
     public TouchConttroler(VibrationComponent vib, TextView mytext, AnimationConttroler animConttroler, ConstraintLayout number_menu, DisplayMetrics dMetrics) {
         vibration = vib;
         int square = dMetrics.widthPixels * dMetrics.heightPixels;
-        SIZE_PLAYER_PX = (int) Math.sqrt(square/170);
+        SIZE_PLAYER_PX = (int) Math.sqrt(square/160);
         SIZE_BALL_PX = (int) Math.sqrt(square/235);
         LENGTH_DEATTACH_BALL = SIZE_PLAYER_PX;
         LENGTH_ATTACH_BALL = SIZE_PLAYER_PX/2f;
