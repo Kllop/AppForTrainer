@@ -80,7 +80,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <com.example.appfortrainer.paint.CustomSeekBar
+                <we.polo.appfortrainer.paint.CustomSeekBar
                     android:id="@+id/count_main_player"
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
@@ -92,7 +92,7 @@
                     android:thumb="@drawable/player_white_seek_bar"
                     android:thumbOffset="0dp" />
 
-                <com.example.appfortrainer.paint.CustomSeekBar
+                <we.polo.appfortrainer.paint.CustomSeekBar
                     android:id="@+id/count_enemy_player"
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
